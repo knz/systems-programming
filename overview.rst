@@ -1,0 +1,119 @@
+================================
+ Systems programming 2014-2015
+================================
+
+Lecture topics
+==============
+
++----------------------------------------+----------------------------------------+
+| SysP from the process perspective      | SysP from the system perspective       |
++----------------------------------------+----------------------------------------+
+| - Introduction to C                    | - fork() vs. clone()                   |
+| - The C abstract machine model         | - Inter-process communication          |
+| - The Unix process model               | - Time and randomness                  |
+| - System calls and inline assembly     | - Asynchronous I/O                     |
+| - Address spaces and mmap()            | - gdb and remote debugging             |
+| - Introduction to Rust                 | - Autoconf and Automake                |
++----------------------------------------+----------------------------------------+
+
+Assignment list
+===============
+
+=========== ========================== ============ ========== ========
+Assignment  Focus                      Deadline     Duration   P-factor
+=========== ========================== ============ ========== ========
+minic       Get to know C / libraries  Sep 5th      4 days     1
+mystr       Strings, pointers          Sep 9th      4 days     2
+myconv      Arithmetic                 Sep 12th     3 days     3
+myfile      Buffering, syscalls        Sep 19th     7 days     4+4
+myprintf    va_args                    Sep 23rd     4 days     3+2
+myheap      Virtual memory             Sep 28th     5 days     4+8
+myls        File system, stat          Oct 3rd      5 days     4+3
+myftpd      Networking                 Oct 8th      5 days     6+4
+sigcopy     Signals and side channels  Oct 14th     4 days     4+4
+cryptserv   POSIX IPCs                 Oct 19th     5 days     4+6
+minishell   Process control            Oct 31th     5-10 days  8+12
+=========== ========================== ============ ========== ========
+
+Each submitted archive must be named after the name of the assignment
+in this table (eg. ``minic.tar.gz``).
+
+Programming environment
+=======================
+
+**Editor:** Emacs or vim strongly recommended. Think about
+learning something new vs. long-term benefit of using a stable tool.
+**OS for coding:** Beware of line endings and file name
+cases. **Portability of C code:** Beware of differences between BSD
+(incl.  OSX) and SysV (incl. Linux) regarding the interaction between
+signals and syscalls, and wrt. the persistence of signal handlers.
+
+Work organization and P-factor
+==============================
+
+The rules for this course are simple: read, write code,
+check/test. **Hard.**
+
+But how hard is “hard”? This question is particularly relevant for
+students who think they already know how to program well, and
+therefore feel entitled to work less (or less hard).  Is it “hard” as
+in “I must attend all the sessions and spend 2-4 hours every day after
+school to study”-hard? Or “I can start coding one hour before the
+deadline and still get a passing grade”-hard?
+
+There are two answers depending on your work ethics.
+
+If you know that you will invest at least 2 serious study hours every
+day, and allocate the time needed to read supplementary materials
+whenever you can (eg. on the bus, before sleep, etc.), then you can do
+just that, and it should work. You will even probably get a good
+grade.
+
+If you know about yourself that you have a procrastination problem
+(NB: most students in CS have one, be honest with yourself), then
+you should use the P-factor in the table above.
+
+The P-factor works as follows.
+
+First, think about how procrastination works.  Imagine you have a
+deadline by next Monday morning. During the week, you casually read
+the assignment text and estimate it should be easy enough to do during
+the week-end. Maybe you will quickly scan some articles or a tutorial
+on the topic. On Saturday morning, your family organizes an outing, so
+you think you will work on Saturday night. But then your friends ask
+you out on Saturday night, so you decide to work long hours on
+Sunday. On Sunday morning, you turn your computer on, start the code
+editor, and try to get started with the assignment. But then you open
+one web page, then another, read plenty of ancillary articles that are
+only remotely related to the assignment, but which you find
+interesting anyway. Before you realize, it is already dinner time and
+time for news on TV or your favorite sitcom. And then the stress
+starts becoming unbeareable, so you sit at the computer and actually
+get going *hard* with the assignment.
+
+If the P-factor has a single number X, and your Sunday evening frenzy
+starts at least *X* hours before the deadline, then you *may* have a
+chance to complete the assignment so as to get a passing grade. It
+*will* require that amount of “rush hours”, though: high-stress,
+high-energy, lots of caffeine, bad sleep. If you have ever procrastinated on something important,
+you know what I mean already. It also only works if you are already
+sufficiently proficient (A2-B1 according to `this table
+<http://science.raphael.poss.name/programming-levels.html>`_).
+
+If the P-factor has two numbers “Y+X”, then you are absolutely
+screwed. You will *not* be able to finish the assignment, even if you
+have *X+Y* late night hours available before the deadline.
+
+The form “Y+X” means that you must spend at least a P-factor Y
+worth of effort on the assignment first, then *sleep a full night over it*, then
+spend another P-factor X worth of effort.  The
+“sleep break” is necessary to mentally check your work and realize how
+to finish/test/improve it.
+
+But really, don't procrastinate. The high-stress, high-energy effort
+necessary for this kind of “final rush” is extremely unhealthy
+(speaking from experience), and will not get you grades as good as if
+you worked regularly.
+
+Grading
+=======
