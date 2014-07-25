@@ -32,7 +32,7 @@ myls        File system, stat          Oct 3rd      5 days     4+3
 myftpd      Networking                 Oct 8th      5 days     6+4
 sigcopy     Signals and side channels  Oct 14th     4 days     4+4
 cryptserv   POSIX IPCs                 Oct 19th     5 days     4+6
-minishell   Process control            Oct 31th     5-10 days  8+12
+minishell   Process control            Oct 31th     10 days    8+12
 =========== ========================== ============ ========== ========
 
 Each submitted archive must be named after the name of the assignment
@@ -117,3 +117,49 @@ you worked regularly.
 
 Grading
 =======
+
+The grading for this course uses two sources for credits:
+
+- the programming assignments, which determine the bulk of the final
+  grade.
+- class participation, which can earn a bonus of up to 0.5
+  point on the final grade.
+
+The formula to compute the final grade is as follows:
+
+1. at the end of the period, a “base grade” *B* is computed as follows:
+
+   - if the non-weighted sum of the assignment grades is greater than
+     or equal to 48, then the base grade is 6.
+   - otherwise, the base grade is equal to the non-weighted sum of the
+     assignment grades divided by 8.
+
+   In other words, :math:`B = \frac{\min(48, \sum_{i=1}^{11} C_i)}{8}`
+2. The extra credits above 6 for every assignment are then weighted by
+   the assignment durations to compute an “extra grade” *E*, rounded
+   down to the nearest multiple of 0.5.
+
+   In other words, :math:`E = \frac{1}{2}\lfloor 2\frac{\sum_{i=1}^{11} d_i \times \max(0, C_i-6)}{\sum_{i=1}^{11} d_i}\rfloor`
+
+3. the final grade is equal to either *B* if *B<6*, or *B+E* if *B* is
+   6 or greater, rounded to the nearest multiple of 0.5. The 0.5
+   bonus, if earned, is then added to this. Of course, the final grade
+   is also capped to 10.
+
+Some examples:
+
+- Bart failed 3 assignments entirely (grade = 1) but obtained exactly
+  6 to all other assignments. B = 6, E = 0; Bart gets a final grade
+  between 6 and 6.5.
+- Denise failed the first 3 assigments entirely (grade = 1) but
+  obtained 10 to all other assignments. B = 6, E = 3; Denise gets a
+  final grade between 9 and 9.5.
+- Simon worked regularly from the beginning and obtained a 8 on
+  the first 5 assignments, but then was very sick one week (grade = 1), then
+  only achieved 6 on the next 3 assignments before giving up.
+  B = 6, E = 0.5; Simon gets a final grade between 6.5 and 7.
+
+Overall this grading system is more generous than a simple weighted
+average rounded down. It allows a student to completely fail up to 3
+assignments and still get a good grade, as long as they perform above
+average on the remaining assignments.

@@ -1,0 +1,35 @@
+http://serversforhackers.com/editions/2014/07/01/ssh-tricks/
+http://computer.howstuffworks.com/c23.htm/printable
+
+http://www.brendangregg.com/USEmethod/use-linux.html
+http://cfenollosa.com/misc/tricks.txt
+
+http://lwn.net/Articles/604287/
+https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org
+https://news.ycombinator.com/item?id=8079083
+
+resources "programming"
+
+http://graydon2.dreamwidth.org/3186.html
+http://graydon2.dreamwidth.org/189377.html
+
+https://www.hackerschool.com/manual#sub-sec-social-rules
+
+http://pepijndevos.nl/2012/08/12/the-multiple-index-problem.html
+http://maryrosecook.com/blog/post/the-fibonacci-heap-ruins-my-life
+
+http://ejenk.com/blog/why-dependently-typed-programming-will-one-day-rock-your-world.html
+
+http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming/
+
+ideeen intro 1ste college:
+- leeslijst voor "gevordenen" 
+  - TAOCP
+  - Art of Unix programming
+  - Intro Algorithms
+- afspraak "ok voor afleiding, maar moet over programming gaan"
+- "niet ok om grapjes te maken van onwetenheid - alle vragen mogen"
+- xkcd "you're the 1000th today to learn this"
+
+http://pythoninternal.wordpress.com/
+

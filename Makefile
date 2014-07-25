@@ -1,4 +1,4 @@
-DOCS = cstd.rst test1.rst overview.rst minic.rst mystr.rst
+DOCS = cstd.rst test1.rst overview.rst minic.rst mystr.rst myconv.rst
 
 LATEX2PDF = latexmk -pdf -g
 RST2HTML = rst2html --syntax-highlight=short --stylesheet-path=aux/min.css --link-stylesheet
