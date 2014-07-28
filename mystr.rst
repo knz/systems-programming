@@ -16,11 +16,11 @@ of the same name (without ``my_``):
 .. code:: c
 
   const char *my_strchr(const char *s, int c);
-  unsigned long my_strlcpy(char *dst, const char *src, unsigned long n);
-  unsigned long my_strlcat(char *dst, const char *src, unsigned long n);
-  int my_strncmp(const char *s1, const char *s2, unsigned long n);
-  void *my_memcpy(void *dst, const void *src, unsigned long n);
-  void *my_memset(void *dst, int c, unsigned long n);
+  unsigned my_strlcpy(char *dst, const char *src, unsigned n);
+  unsigned my_strlcat(char *dst, const char *src, unsigned n);
+  int my_strncmp(const char *s1, const char *s2, unsigned n);
+  void *my_memcpy(void *dst, const void *src, unsigned n);
+  void *my_memset(void *dst, int c, unsigned n);
 
 You can optionally also implement the following for a higher grade
 (see Grading_ below):
@@ -30,7 +30,7 @@ You can optionally also implement the following for a higher grade
   const char *my_strrchr(const char *s, int c);
   const char *my_strpbrk(const char *s1, const char *s2);
   const char *my_strstr(const char *s1, const char *s2);
-  void *my_memmove(void *dst, const void *src, unsigned long n);
+  void *my_memmove(void *dst, const void *src, unsigned n);
 
 Constraints:
 

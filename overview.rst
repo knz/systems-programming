@@ -25,13 +25,13 @@ Assignment  Focus                      Deadline     Duration   P-factor
 minic       Get to know C / libraries  Sep 5th      4 days     1
 mystr       Strings, pointers          Sep 9th      4 days     2
 myconv      Arithmetic                 Sep 12th     3 days     3
-myfile      Buffering, syscalls        Sep 19th     7 days     4+4
-myprintf    va_args                    Sep 23rd     4 days     3+2
-myheap      Virtual memory             Sep 28th     5 days     4+8
-myls        File system, stat          Oct 3rd      5 days     4+3
-myftpd      Networking                 Oct 8th      5 days     6+4
+mystream    Buffering, syscalls        Sep 19th     7 days     4+4
+myprintf    va_args                    Sep 22nd     3 days     3+2
+myheap      Virtual memory             Sep 28th     6 days     4+8
+myls        File system, stat, options Oct 3rd      5 days     4+3
+mytftpd     Network sockets, time      Oct 8th      5 days     4+4
 sigcopy     Signals and side channels  Oct 14th     4 days     4+4
-cryptserv   POSIX IPCs                 Oct 19th     5 days     4+6
+cryptserv   Unix sockets, select       Oct 19th     5 days     4+6
 minishell   Process control            Oct 31th     10 days    8+12
 =========== ========================== ============ ========== ========
 

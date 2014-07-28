@@ -16,10 +16,9 @@ You must implement the following functions:
    int my_dec2int(const char *s);
    unsigned int my_dec2uint(const char *s);
    unsigned int my_hex2uint(const char *s);
-   int my_int2dec(char *dst, int v, unsigned long n);
-   int my_uint2dec(char *dst, unsigned int v, unsigned long n);
-   int my_uint2hex(char *dst, unsigned int v);
-
+   int my_int2dec(char *dst, int v, unsigned n);
+   int my_uint2dec(char *dst, unsigned v, unsigned n);
+   int my_uint2hex(char *dst, unsigned v);
 
 You can optionally also implement the following for
 a higher grade:
@@ -34,7 +33,9 @@ a higher grade:
   declared in a ``.h`` file, in accordance with the C coding standard.
   The submitted archive may (but needs not) include a test program.
 - you must not include any standard/system header in your code; nor
-  use any function from the standard C library.
+  use any function from the standard C library. You may
+  use functions from a previous assignment (by including
+  their source in your submission).
 
 Function semantics
 ==================
@@ -52,10 +53,13 @@ The first 3 functions will be tested mainly with operands that
 are guaranteed to fit their output type. Optionally, you can choose to implement
 saturation for exceedingly large operands, ie. round to the closest C integer.
 
-``my_int2dec(d, v, n)`` places the decimal representation of ``v`` into
-the buffer pointed to by ``d``, using up to a maximum of ``n`` characters.
+``my_int2dec(d, v, n)`` places the decimal representation of ``v``
+into the buffer pointed to by ``d``, using up to a maximum of ``n``
+characters, and returns the number of characters actually written.
 ``my_uint2dec`` does the same starting with an unsigned integer; and
-``my_uint2hex`` does the same using base 16.
+``my_uint2hex`` does the same using base 16. If the output buffer is
+not large enough, then the conversion must not take place and the
+function must return 0.
 
 The optional functions ``my_strtol`` and ``my_strtoul`` must match the
 documentation of the standard C functions of the same names (without

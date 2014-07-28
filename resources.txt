@@ -7,8 +7,11 @@ http://cfenollosa.com/misc/tricks.txt
 http://lwn.net/Articles/604287/
 https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org
 https://news.ycombinator.com/item?id=8079083
+http://www.linusakesson.net/programming/tty/index.php
 
 resources "programming"
+
+
 
 http://graydon2.dreamwidth.org/3186.html
 http://graydon2.dreamwidth.org/189377.html
@@ -22,8 +25,10 @@ http://ejenk.com/blog/why-dependently-typed-programming-will-one-day-rock-your-w
 
 http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming/
 
+http://blog.codinghorror.com/
+
 ideeen intro 1ste college:
-- leeslijst voor "gevordenen" 
+- leeslijst voor "gevordenen"
   - TAOCP
   - Art of Unix programming
   - Intro Algorithms
@@ -32,4 +37,3 @@ ideeen intro 1ste college:
 - xkcd "you're the 1000th today to learn this"
 
 http://pythoninternal.wordpress.com/
-
