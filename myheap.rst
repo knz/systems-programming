@@ -4,6 +4,8 @@
 
 Deadline: September 28th, 2014
 
+.. sectnum::
+
 Instructions
 ============
 
@@ -54,3 +56,16 @@ Grading
   ``sysconf``; for this extra grade you may include ``<unistd.h>``).
 
 - +1 point if the implementation provides its own wrappers for system calls.
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

@@ -4,6 +4,8 @@
 
 Deadline: September 19th, 2014
 
+.. sectnum::
+
 Instructions
 ============
 
@@ -249,3 +251,16 @@ System call numbers:
     #  define SYS_lseek    8
     # endif
     #endif
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

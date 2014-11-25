@@ -4,6 +4,8 @@
 
 Deadline: October 3rd, 2014
 
+.. sectnum::
+
 Instructions
 ============
 
@@ -51,4 +53,17 @@ Grading
 - +1 point if ``myls`` also supports more than 1 file/directory argument.
 - +0.5 point if multi-column output is properly implemented.
 - +1.5 point if output sorting is properly implemented (including ``-f``, ``-t`` and ``-S``);
-- +1 point if any additional feature is implemented and duly documented in an enclosed ``README`` file.
+- +1 point if any additional feature is implemented and duly documented in an enclosed ``README`` file, and your examinator agrees it is indeed useful.
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

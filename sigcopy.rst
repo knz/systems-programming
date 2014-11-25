@@ -2,7 +2,9 @@
  SigCopy
 =========
 
-Deadline: October 14th, 2014
+Deadline: October 10th, 2014
+
+.. sectnum::
 
 Instructions
 ============
@@ -33,8 +35,9 @@ Example session::
 
 - Your programs must use SIGUSR1 and SIGUSR2 for the data transfer. Tip: ``sigaction/siginfo_t``.
 - You may use any standard C function (either from ISO C 1999/2011 or
-  POSIX); however your code may not write to any file, message queue
-  or socket other than the standard output.
+  POSIX); however your code may not use any descriptor-based
+  channel (file, pipe, socket, etc.) other than
+  the standard output, nor use the SysV or POSIX “msg”, “mq”, “shm” or “sem” IPC facilities.
 - You may not use ``system`` or any other mechanism that invokes an
   external program.
 
@@ -47,3 +50,16 @@ Grading
   not known in advance (eg. reading from ``/dev/stdin``).
 - +1 point if your programs are robust to the spurious insersion
   of extra signals during the transfer.
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

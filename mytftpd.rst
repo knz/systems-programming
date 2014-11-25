@@ -2,7 +2,9 @@
  MyTftpd
 =========
 
-Deadline: October 8th, 2014
+Deadline: October 17th, 2014
+
+.. sectnum::
 
 Instructions
 ============
@@ -32,10 +34,21 @@ sizes greater than 32MB.
 Grading
 =======
 
-- 6 points if your program ``mytftpd`` works without arguments, and can
+- 7 points if your program ``mytftpd`` works without arguments, and can
   answer simple ``get`` or ``put`` commands from a standard TFTP client.
 - +1 point if your program can bind to the address and port number
   specified on the command line.
-- +1 point if your program can transfer files larger than 32MB.
-- +2 points if your program can support transfers from multiple clients
-  simultaneously (identified by client address/port number).
+- +2 point if your program can transfer files larger than 32MB.
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

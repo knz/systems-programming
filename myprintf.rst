@@ -78,7 +78,7 @@ You may implement the following for a higher grade:
   “``st_printf(st, "%06d", 123)``” would print “``000123``”.
 - a variable “minimum width” with ``*``, where the width
   is determined by an ``int`` positional argument. For example,
-  ``st_printf(st, "%*s", 6, "hello")`` prints 6 spaces then “``hello``”.
+  ``st_printf(st, "%*s", 6, "hello")`` prints 1 spaces then “``hello``”.
 - the function:
 
   .. code:: c
@@ -102,3 +102,16 @@ Grading
 - +0.5 if variable minimum width is properly implemented.
 - +0.5 if ``st_printf`` does not use ``malloc``/``realloc``/``free``.
 - +0.5 if ``my_snprintf`` is properly implemented.
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

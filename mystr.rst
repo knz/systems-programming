@@ -55,3 +55,16 @@ Grading
 - +1 point for “cleverness” in either ``my_strstr``, ``my_memcpy`` or
   ``my_memmove``, provided with an explanation and empirical proof of the
   improvement compared to a naive implementation.
+
+----
+
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.

@@ -209,6 +209,7 @@ Code layout
   (code 10) as white space; in particular ASCII tabs (code 9) must not
   be used, nor the DOS/Windows carriage return (code 13).
 - all code must fit within 80 columns.
+- code must not contain trailing whitespaces.
 - the body of a function definition can contain at most 25 lines of
   code (opening and closing braces excluded).
 - function bodies must not contain any comments; comments that explain
@@ -232,7 +233,7 @@ Code layout
 
        * .. code:: c
 
-            // Good:
+            // Bad:
             void foo(void)
             {
              while (1) // 1 spaces = too small
@@ -752,32 +753,15 @@ Run-time behavior
   (cf. ``valgrind --leak-check=full``).
 
 
+----
 
-..    Example ``Makefile``
-..    ====================
-..
-..    The following ``Makefile`` can be used as starting point for new projects::
-..
-..       TARGETS = hello world
-..       hello_SOURCES = hello1.c hello2.c
-..       world_SOURCES = world.c
-..       MYLDFLAGS = -g
-..       MYCFLAGS = -g -O2
-..
-..       all: $(TARGETS)
-..
-..       hello: $(hello_SOURCES:.c=.o)
-..            $(LD) $(MYLDFLAGS) $(LDFLAGS) -o $@ $^
-..
-..       world: $(world_SOURCES:.c=.o)
-..            $(LD) $(MYLDFLAGS) $(LDFLAGS) -o $@ $^
-..
-..       .c.o:
-..            $(CC) $(MYCFLAGS) $(CFLAGS) -o $@ $^
-..
-..       clean:
-..            rm -f *.o
-..            rm -f $(TARGETS)
-..
-..    .. note:: ``Makefile`` rules must start with tab characters, so this example must
-..       be adapted when copy-and-pasting for use in a project.
+Copyright and licensing
+=======================
+
+Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+`http://creativecommons.org/licenses/by-sa/4.0/
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.
