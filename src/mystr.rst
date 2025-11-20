@@ -61,7 +61,7 @@ Grading
 Copyright and licensing
 =======================
 
-Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+Copyright © 2014, `Raphael Poss <https://raphaelposs.com>`__.  Permission is granted to
 distribute, reuse and modify this document and other documents for the
 Systems Programming course by the same author according to the terms
 of the Creative Commons Attribution-ShareAlike 4.0 International
