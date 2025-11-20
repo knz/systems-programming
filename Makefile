@@ -6,13 +6,13 @@ LATEX2PDF = latexmk -pdf -g
 RST2HTML = rst2html --syntax-highlight=short --stylesheet-path=aux/min.css --link-stylesheet
 RST2LATEX = rst2latex --use-latex-citations --use-latex-docinfo --latex-preamble="" --syntax-highlight=short --template=aux/template.tex --embed-stylesheet --documentoptions=11pt --stylesheet=aux/base.sty,aux/pygments-emacs.sty
 
-all: $(DOCS:.rst=.pdf) $(DOCS:.rst=.html) index.html index.rst
+all: $(DOCS:.rst=.pdf) $(DOCS:.rst=.html) $(DOCS:.rst=.txt) index.html index.rst
 .SUFFIXES: .pdf .ltx .txt .png .html
 
 .PHONY: show-files
-show-files:
+show-files: index.txt
 	@for i in $(DOCS:.rst=); do if test -d $$i; then echo $$i; fi; done
-	@echo index.txt index.html  $(DOCS:.rst=.txt) $(DOCS:.rst=.html) $(DOCS:.rst=.pdf) aux/min.css
+	@echo index.txt index.html $(DOCS:.rst=.txt) $(DOCS:.rst=.html) $(DOCS:.rst=.pdf) aux/min.css
 
 %.txt: %.rst
 	ln -sf $< $@

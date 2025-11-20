@@ -11,83 +11,83 @@ The following documents are used for this course:
 
   .. __: overview.html
   .. __: overview.pdf
-  .. __: overview.rst
+  .. __: overview.txt
 
 - `Quick start assessment`__. (also in PDF__ and `source form`__).
 
   .. __: test1.html
   .. __: test1.pdf
-  .. __: test1.rst
+  .. __: test1.txt
 
 - `C Coding standard`__. (also in PDF__ and `source form`__).
 
   .. __: cstd.html
   .. __: cstd.pdf
-  .. __: cstd.rst
+  .. __: cstd.txt
 
 - `MiniC`__. (also in PDF__ and `source form`__).
 
   .. __: minic.html
   .. __: minic.pdf
-  .. __: minic.rst
+  .. __: minic.txt
 
 - `MyStr`__. (also in PDF__ and `source form`__).
 
   .. __: mystr.html
   .. __: mystr.pdf
-  .. __: mystr.rst
+  .. __: mystr.txt
 
 - `MyConv`__. (also in PDF__ and `source form`__).
 
   .. __: myconv.html
   .. __: myconv.pdf
-  .. __: myconv.rst
+  .. __: myconv.txt
 
 - `MyStream`__. (also in PDF__ and `source form`__).
 
   .. __: mystream.html
   .. __: mystream.pdf
-  .. __: mystream.rst
+  .. __: mystream.txt
 
 - `MyPrintf`__. (also in PDF__ and `source form`__).
 
   .. __: myprintf.html
   .. __: myprintf.pdf
-  .. __: myprintf.rst
+  .. __: myprintf.txt
 
 - `MyHeap`__. (also in PDF__ and `source form`__).
 
   .. __: myheap.html
   .. __: myheap.pdf
-  .. __: myheap.rst
+  .. __: myheap.txt
 
 - `MyLs`__. (also in PDF__ and `source form`__).
 
   .. __: myls.html
   .. __: myls.pdf
-  .. __: myls.rst
+  .. __: myls.txt
 
 - `MyTftpd`__. (also in PDF__ and `source form`__).
 
   .. __: mytftpd.html
   .. __: mytftpd.pdf
-  .. __: mytftpd.rst
+  .. __: mytftpd.txt
 
 - `SigCopy`__. (also in PDF__ and `source form`__).
 
   .. __: sigcopy.html
   .. __: sigcopy.pdf
-  .. __: sigcopy.rst
+  .. __: sigcopy.txt
 
 - `CryptServ`__. (also in PDF__ and `source form`__).
 
   .. __: cryptserv.html
   .. __: cryptserv.pdf
-  .. __: cryptserv.rst
+  .. __: cryptserv.txt
 
 - `MiniShell`__. (also in PDF__ and `source form`__).
 
   .. __: minishell.html
   .. __: minishell.pdf
-  .. __: minishell.rst
+  .. __: minishell.txt
 

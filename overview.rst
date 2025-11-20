@@ -5,6 +5,10 @@
 Overview
 ========
 
+- Your lecturer: `Raphael 'kena' Poss`__
+
+  .. __: https://science.raphael.poss.name/
+
 - **Course program:**
 
   - lectures on Tuesday 1:30pm-3:15pm (WN-M639) and Friday
