@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>Systems programming 2014-2015</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="systems-programming-2014-2015">
+<h1 class="title">Systems programming 2014-2015</h1>
+
+<div class="section" id="overview">
+<h1>Overview</h1>
+<ul>
+<li><p class="first">Your lecturer: <a class="reference external" href="https://science.raphael.poss.name/">Raphael 'kena' Poss</a></p>
+</li>
+<li><p class="first"><strong>Course program:</strong></p>
+<ul class="simple">
+<li>lectures on Tuesday 1:30pm-3:15pm (WN-M639) and Friday
+9:00am-10:45am (HG-08A04), from September 2nd to October 17th
+inclusive.</li>
+<li>Assignments the rest of the time until end of October.</li>
+</ul>
+</li>
+<li><p class="first"><strong>Course materials:</strong></p>
+<ul class="simple">
+<li>Course overview (this document).</li>
+<li>C coding standard.</li>
+<li>Quick start assessment.</li>
+<li>Programming assignments (11 documents).</li>
+</ul>
+</li>
+<li><p class="first"><strong>External references:</strong></p>
+<ul>
+<li><p class="first">Brian W. Kernighan &amp; Dennis .M. Ritchie. <em>The C Programming Language</em>, 2nd edition.</p>
+<p>ISBN 0-13-110362-8.</p>
+</li>
+<li><p class="first">Simon Tatham. <em>Descent to C</em>.</p>
+<p><a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/cdescent/">http://www.chiark.greenend.org.uk/~sgtatham/cdescent/</a></p>
+</li>
+<li><p class="first">ISO/IEC 9899:2011, <em>Programming Languages – C</em>. Final draft available online at</p>
+<p><a class="reference external" href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf</a></p>
+</li>
+<li><p class="first">Eric S. Raymond. <em>The Art of Unix Programming</em>.</p>
+<p><a class="reference external" href="http://catb.org/~esr/writings/taoup/">http://catb.org/~esr/writings/taoup/</a></p>
+</li>
+<li><p class="first">FSF. <em>The GNU make manual</em>.</p>
+<p><a class="reference external" href="http://www.gnu.org/software/make/manual/">http://www.gnu.org/software/make/manual/</a></p>
+</li>
+<li><p class="first">Bram Moolenaar. <em>the Vim Tutor</em>.</p>
+<p><tt class="docutils literal">vimtutor</tt> at the command line.</p>
+</li>
+<li><p class="first">FSF. <em>A Guided Tour of Emacs</em>.</p>
+<p><a class="reference external" href="http://www.gnu.org/software/emacs/tour/">http://www.gnu.org/software/emacs/tour/</a></p>
+</li>
+<li><p class="first">Max Thayer. <em>How to Write a Readme Worth Reading</em>.</p>
+<p><a class="reference external" href="http://orchestrate.io/blog/2014/07/16/how-to-write-a-readme-worth-reading/">http://orchestrate.io/blog/2014/07/16/how-to-write-a-readme-worth-reading/</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="lecture-topics">
+<h1>Lecture topics</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>SysP from the process perspective</td>
+<td>SysP from the system perspective</td>
+</tr>
+<tr><td><ul class="first last simple">
+<li>Introduction to C</li>
+<li>The C abstract machine model</li>
+<li>The Unix process model</li>
+<li>System calls and inline assembly</li>
+<li>Address spaces and mmap()</li>
+<li>Introduction to Rust</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li>fork() vs. clone()</li>
+<li>Inter-process communication</li>
+<li>Time and randomness</li>
+<li>Asynchronous I/O</li>
+<li>gdb and remote debugging</li>
+<li>Autoconf and Automake</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="assignment-list">
+<h1>Assignment list</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="16%" />
+<col width="37%" />
+<col width="17%" />
+<col width="14%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Nr</th>
+<th class="head">Assignment</th>
+<th class="head">Focus</th>
+<th class="head">Deadline</th>
+<th class="head">Duration</th>
+<th class="head">P-factor</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>minic</td>
+<td>Get to know C / libraries</td>
+<td>Sep 5th</td>
+<td>4 days</td>
+<td>1</td>
+</tr>
+<tr><td>2</td>
+<td>mystr</td>
+<td>Strings, pointers</td>
+<td>Sep 9th</td>
+<td>4 days</td>
+<td>2</td>
+</tr>
+<tr><td>3</td>
+<td>myconv</td>
+<td>Arithmetic</td>
+<td>Sep 12th</td>
+<td>3 days</td>
+<td>3</td>
+</tr>
+<tr><td>4</td>
+<td>mystream</td>
+<td>Buffering, syscalls</td>
+<td>Sep 19th</td>
+<td>7 days</td>
+<td>4+4</td>
+</tr>
+<tr><td>5</td>
+<td>myprintf</td>
+<td>va_args</td>
+<td>Sep 22nd</td>
+<td>3 days</td>
+<td>3+2</td>
+</tr>
+<tr><td>.</td>
+<td>myheap*</td>
+<td>Virtual memory</td>
+<td>Sep 28th</td>
+<td>6 days</td>
+<td>4+8</td>
+</tr>
+<tr><td>6</td>
+<td>myls</td>
+<td>File system, stat, options</td>
+<td>Oct 3rd</td>
+<td>5 days</td>
+<td>4+3</td>
+</tr>
+<tr><td>7</td>
+<td>sigcopy</td>
+<td>Signals and side channels</td>
+<td>Oct 10th</td>
+<td>5 days</td>
+<td>4+4</td>
+</tr>
+<tr><td>8</td>
+<td>mytftpd</td>
+<td>Network sockets, time</td>
+<td>Oct 17th</td>
+<td>5 days</td>
+<td>4+4</td>
+</tr>
+<tr><td>9</td>
+<td>cryptserv</td>
+<td>Unix sockets, select</td>
+<td>Oct 24th</td>
+<td>5 days</td>
+<td>4+6</td>
+</tr>
+<tr><td>.</td>
+<td>minishell*</td>
+<td>Process control</td>
+<td>Oct 31th</td>
+<td>10 days</td>
+<td>8+12</td>
+</tr>
+</tbody>
+</table>
+<p>The assignments whose name is followed by an asterisk are &quot;bonus&quot;
+assignments, see <a class="reference internal" href="#grading">Grading</a> below.</p>
+<p>All assignments must adhere to the accompanying <strong>C coding standard</strong>.
+<em>Read it before starting work on your assignments.</em>
+Each submitted archive must be named after the name of the assignment
+in this table (eg. <tt class="docutils literal">minic.tar.gz</tt>).</p>
+</div>
+<div class="section" id="programming-environment">
+<h1>Programming environment</h1>
+<p><strong>Editor:</strong> Emacs or vim strongly recommended. Think about
+learning something new vs. long-term benefit of using a stable tool.
+<strong>OS for coding:</strong> Beware of line endings and file name
+cases. <strong>Portability of C code:</strong> Beware of differences between BSD
+(incl.  OSX) and SysV (incl. Linux) regarding the interaction between
+signals and syscalls, and wrt. the persistence of signal handlers.</p>
+</div>
+<div class="section" id="grading">
+<h1>Grading</h1>
+<p>The grading for this course uses two sources for credits:</p>
+<ul class="simple">
+<li>the 9 mandatory programming assignments, which determine the bulk of
+the final grade;</li>
+<li>the 2 bonus assignments, which earn a bonus percentage;</li>
+<li>class participation, which can earn a fixed bonus of up to 0.5
+point on the final grade.</li>
+</ul>
+<p>The formula to compute the final grade is as follows:</p>
+<ol class="arabic">
+<li><p class="first">at the end of the period, a “base grade” <em>B</em> is computed as follows:</p>
+<ul class="simple">
+<li>if the non-weighted sum of the mandatory assignment grades is
+greater than or equal to 42, then the base grade is 6.</li>
+<li>otherwise, the base grade is equal to the non-weighted sum of the
+mandatory assignment grades divided by 7.</li>
+</ul>
+<p>In other words, <span class="formula"><i>B</i> = <span class="fraction"><span class="ignored">(</span><span class="numerator"><span class="limits"><span class="limit">min</span></span>(42, <span class="limits"><span class="limit"><span class="bigoperator">∑</span></span></span><span class="scripts"><sup class="script">9</sup><sub class="script"><i>i</i> = 1</sub></span><i>C</i><sub><i>i</i></sub>)</span><span class="ignored">)/(</span><span class="denominator">7</span><span class="ignored">)</span></span></span></p>
+</li>
+<li><p class="first">The extra credits above 6 for every mandatory assignment are then
+weighted by the assignment durations to compute an “extra grade”
+<em>E</em>, rounded down to the nearest multiple of 0.5.</p>
+<p>In other words, <span class="formula"><i>E</i> = <span class="fraction"><span class="ignored">(</span><span class="numerator">1</span><span class="ignored">)/(</span><span class="denominator">2</span><span class="ignored">)</span></span>⌊2<span class="fraction"><span class="ignored">(</span><span class="numerator"><span class="limits"><span class="limit"><span class="bigoperator">∑</span></span></span><span class="scripts"><sup class="script">9</sup><sub class="script"><i>i</i> = 1</sub></span><i>d</i><sub><i>i</i></sub>×<span class="limits"><span class="limit">max</span></span>(0, <i>C</i><sub><i>i</i></sub> − 6)</span><span class="ignored">)/(</span><span class="denominator"><span class="limits"><span class="limit"><span class="bigoperator">∑</span></span></span><span class="scripts"><sup class="script">9</sup><sub class="script"><i>i</i> = 1</sub></span><i>d</i><sub><i>i</i></sub></span><span class="ignored">)</span></span>⌋</span></p>
+</li>
+<li><p class="first">The “intermediate” grade <em>I</em> is equal to either <em>B</em> if <em>B&lt;6</em>, or
+<em>B+E</em> if <em>B</em> is 6 or greater, rounded to the nearest multiple of
+0.5.</p>
+</li>
+<li><p class="first">The two bonus assignments (myheap and minishell) then determine a
+factor <em>K</em> as follows: <em>K</em> starts at 1, and is incremented by 0.05
+(+5%) for every 2 points you score on the bonus assignments.</p>
+<p>In other words, <span class="formula"><i>K</i> = 1 + 0.05×⌊<span class="fraction"><span class="ignored">(</span><span class="numerator">(<i>C</i><sub><span class="text">myheap</span></sub> + <i>C</i><sub><span class="text">minishell</span></sub>)</span><span class="ignored">)/(</span><span class="denominator">2</span><span class="ignored">)</span></span>⌋</span></p>
+</li>
+<li><p class="first">The final grade <em>F</em> is the intermediate grade <em>I</em> scaled by <em>K</em>,
+ie. <span class="formula"><i>F</i> = <i>I</i>×<i>K</i></span>. The 0.5 bonus, if earned, is then added
+to this. Of course, the final grade is also capped to 10.</p>
+</li>
+</ol>
+<p>Some examples:</p>
+<ul class="simple">
+<li>Bart failed 3 assignments entirely (grade = 1) but obtained exactly
+6 to all other assignments. B = 6, E = 0; Bart gets a final grade
+between 6 and 6.5.</li>
+<li>Denise failed the first 3 assigments entirely (grade = 1) but
+obtained 10 to all other assignments. B = 6, E = 3; Denise gets a
+final grade between 9 and 9.5.</li>
+</ul>
+<p>Overall this grading system is more generous than a simple weighted
+average rounded down. It allows a student to completely fail up to 3
+assignments and still get a good grade, as long as they perform above
+average on the remaining assignments.</p>
+</div>
+<div class="section" id="work-organization-and-p-factor">
+<h1>Work organization and P-factor</h1>
+<p>The rules for this course are simple: read, write code,
+check/test. <strong>Hard.</strong></p>
+<p>But how hard is “hard”? This question is particularly relevant for
+students who think they already know how to program well, and
+therefore feel entitled to work less (or less hard).  Is it “hard” as
+in “I must attend all the sessions and spend 2-4 hours every day after
+school to study”-hard? Or “I can start coding one hour before the
+deadline and still get a passing grade”-hard?</p>
+<p>There are two answers depending on your work ethics.</p>
+<p>If you know that you will invest at least 2 serious study hours every
+day, and allocate the time needed to read supplementary materials
+whenever you can (eg. on the bus, before sleep, etc.), then you can do
+just that, and it should work. You will even probably get a good
+grade.</p>
+<p>If you know about yourself that you have a procrastination problem
+(NB: most students in CS have one, be honest with yourself), then
+you should use the P-factor in the table above.</p>
+<p>The P-factor works as follows.</p>
+<p>First, think about how procrastination works.  Imagine you have a
+deadline by next Monday morning. During the week, you casually read
+the assignment text and estimate it should be easy enough to do during
+the week-end. Maybe you will quickly scan some articles or a tutorial
+on the topic. On Saturday morning, your family organizes an outing, so
+you think you will work on Saturday night. But then your friends ask
+you out on Saturday night, so you decide to work long hours on
+Sunday. On Sunday morning, you turn your computer on, start the code
+editor, and try to get started with the assignment. But then you open
+one web page, then another, read plenty of ancillary articles that are
+only remotely related to the assignment, but which you find
+interesting anyway. Before you realize, it is already dinner time and
+time for news on TV or your favorite sitcom. And then the stress
+starts becoming unbeareable, so you sit at the computer and actually
+get going <em>hard</em> with the assignment.</p>
+<p>If the P-factor has a single number X, and your Sunday evening frenzy
+starts at least <em>X</em> hours before the deadline, then you <em>may</em> have a
+chance to complete the assignment so as to get a passing grade. It
+<em>will</em> require that amount of “rush hours”, though: high-stress,
+high-energy, lots of caffeine, bad sleep. If you have ever procrastinated on something important,
+you know what I mean already. It also only works if you are already
+sufficiently proficient (A2-B1 according to <a class="reference external" href="http://science.raphael.poss.name/programming-levels.html">this table</a>).</p>
+<p>If the P-factor has two numbers “Y+X”, then you are absolutely
+screwed. You will <em>not</em> be able to finish the assignment, even if you
+have <em>X+Y</em> late night hours available before the deadline.</p>
+<p>The form “Y+X” means that you must spend at least a P-factor Y
+worth of effort on the assignment first, then <em>sleep a full night over it</em>, then
+spend another P-factor X worth of effort.  The
+“sleep break” is necessary to mentally check your work and realize how
+to finish/test/improve it.</p>
+<p>But really, don't procrastinate. The high-stress, high-energy effort
+necessary for this kind of “final rush” is extremely unhealthy
+(speaking from experience), and will not get you grades as good as if
+you worked regularly.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

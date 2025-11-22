@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MyTftpd</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="mytftpd">
+<h1 class="title">MyTftpd</h1>
+
+<p>Deadline: October 17th, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>Implement a server program for the TFTP protocol (RFC 1350).</p>
+<p>Your program must match the following documentation:</p>
+<pre class="literal-block">
+Usage: mytftpd [ADDR] [PORT]
+
+Start serving the current directory over TFTP.
+
+If ADDR is specified, bind to that address only.
+If both ADDR and PORT are specified, bind to the specified port.
+</pre>
+<ul class="simple">
+<li>Your server must reject requests for transfering files outside
+of the current directory.</li>
+<li>You may restrict your implementation to support only the “octet” transfer mode.</li>
+<li>You may use any standard C function (either from ISO C 1999/2011 or
+POSIX).</li>
+<li>You may not use <tt class="docutils literal">system</tt> or any other mechanism that invokes an
+external program.</li>
+</ul>
+<p>For extra credits you may implement RFC 2348 or 2349 to support file
+sizes greater than 32MB.</p>
+</div>
+<div class="section" id="grading">
+<h1>2&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>7 points if your program <tt class="docutils literal">mytftpd</tt> works without arguments, and can
+answer simple <tt class="docutils literal">get</tt> or <tt class="docutils literal">put</tt> commands from a standard TFTP client.</li>
+<li>+1 point if your program can bind to the address and port number
+specified on the command line.</li>
+<li>+2 point if your program can transfer files larger than 32MB.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>3&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

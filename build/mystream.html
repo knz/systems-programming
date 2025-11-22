@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MyStream</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="mystream">
+<h1 class="title">MyStream</h1>
+
+<p>Deadline: September 19th, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>For this assignment you must:</p>
+<ol class="arabic simple">
+<li>define your own wrappers around the system calls <tt class="docutils literal">open</tt>,
+<tt class="docutils literal">close</tt>, <tt class="docutils literal">read</tt>, <tt class="docutils literal">write</tt>, <tt class="docutils literal">lseek</tt>.</li>
+<li>implement a buffered I/O library.</li>
+</ol>
+<p>In this assignment, you may use the standard C functions <tt class="docutils literal">malloc</tt>,
+<tt class="docutils literal">realloc</tt> and <tt class="docutils literal">free</tt>; as well as functions from previous
+assignments (by including their source in your submission). All other
+external functions are forbidden.</p>
+<p>Each function to implement must be defined in its own <tt class="docutils literal">.c</tt> file,
+named after the function. You must provide a suitable <tt class="docutils literal">Makefile</tt>
+which compiles all the functions and places them in <tt class="docutils literal">libminic.a</tt>.</p>
+</div>
+<div class="section" id="system-calls">
+<h1>2&nbsp;&nbsp;&nbsp;System calls</h1>
+<ol class="arabic">
+<li><p class="first">You must implement the following functions:</p>
+<pre class="code c literal-block">
+<span class="kt">int</span><span class="w"> </span><span class="nf">my_open</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">oflag</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">my_close</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">);</span><span class="w">
+</span><span class="kt">long</span><span class="w"> </span><span class="nf">my_read</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nbyte</span><span class="p">);</span><span class="w">
+</span><span class="kt">long</span><span class="w"> </span><span class="nf">my_write</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nbyte</span><span class="p">);</span>
+</pre>
+<p>Each function must contain inline assembly to perform a system call
+to the operating system. You must support at least one of the
+following combinations: Linux/i386, Linux/x86-64, FreeBSD/i386 or
+FreeBSD/amd64.</p>
+<p>You can easily find information about the syscall interface of
+Linux and FreeBSD online. Some example links are provided in
+<a class="reference internal" href="#references">References</a> below.</p>
+</li>
+<li><p class="first">You must place their prototype in a header named <tt class="docutils literal">mysys.h</tt>,
+together with suitable definitions for the preprocessor macros
+<tt class="docutils literal">O_RDONLY</tt>, <tt class="docutils literal">O_WRONLY</tt>, <tt class="docutils literal">O_RDWR</tt>, <tt class="docutils literal">O_CREAT</tt>, <tt class="docutils literal">O_TRUNC</tt>.</p>
+</li>
+</ol>
+<p>NB: Checks for adherence to the C coding standard for the 4 source files
+containing the definition of these functions will be relaxed, in
+particular regarding compiler warnings. Ensure that you properly document
+violations using comments in your source code.</p>
+</div>
+<div class="section" id="libstream">
+<h1>3&nbsp;&nbsp;&nbsp;Libstream</h1>
+<p>You must define your own type <tt class="docutils literal">st_t</tt> in a header named
+<tt class="docutils literal">mystream.h</tt>, based on a preprocessor macro ST_BUFFER_SIZE:</p>
+<pre class="code c literal-block">
+<span class="cp">#ifndef MYSTREAM_H
+#define MYSTREAM_H
+#ifndef ST_BUFFER_SIZE
+#define ST_BUFFER_SIZE 8192
+#endif
+</span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w">  </span><span class="nc">st</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="c1">// Your definitions here...
+</span><span class="p">}</span><span class="w">               </span><span class="n">st_t</span><span class="p">;</span><span class="w">
+</span><span class="c1">// Functions declarations may follow here.
+</span><span class="cp">#endif</span>
+</pre>
+<p>You must then implement the following functions:</p>
+<pre class="code c literal-block">
+<span class="n">st_t</span><span class="w">     </span><span class="o">*</span><span class="nf">st_open</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w">
+</span><span class="kt">void</span><span class="w">     </span><span class="nf">st_close</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w">
+</span><span class="kt">unsigned</span><span class="w"> </span><span class="nf">st_read</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="p">);</span><span class="w">
+</span><span class="kt">unsigned</span><span class="w"> </span><span class="nf">st_write</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="p">);</span><span class="w">
+</span><span class="kt">void</span><span class="w">     </span><span class="nf">st_flush</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w">      </span><span class="nf">st_gets</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w">      </span><span class="nf">st_puts</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w">      </span><span class="nf">st_putchar</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w">      </span><span class="nf">st_getchar</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w">
+</span><span class="kt">char</span><span class="w">     </span><span class="o">*</span><span class="nf">st_getline</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">);</span>
+</pre>
+<div class="section" id="function-semantics">
+<h2>3.1&nbsp;&nbsp;&nbsp;Function semantics</h2>
+<p>The purpose of this library is to implement buffered I/O:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">st_open(path, mode)</tt></dt>
+<dd>Open the file identified by <tt class="docutils literal">path</tt> and
+return an <tt class="docutils literal">st_t</tt>.  <tt class="docutils literal">mode</tt> may be <tt class="docutils literal">&quot;r&quot;</tt> (open for reading),
+<tt class="docutils literal">w</tt> (open for writing), <tt class="docutils literal">&quot;r+&quot;</tt> (open for reading and writing).
+Return a freshly allocated <tt class="docutils literal">st_t</tt> object, or 0 if an error occurs.</dd>
+<dt><tt class="docutils literal">st_close(st)</tt></dt>
+<dd>Flush the buffer(s) and close the stream. The <tt class="docutils literal">st</tt> object
+must also be deallocated.</dd>
+<dt><tt class="docutils literal">st_write(st, buf, sz)</tt></dt>
+<dd>Write <tt class="docutils literal">sz</tt> bytes from the buffer <tt class="docutils literal">buf</tt> to the stream
+identified by <tt class="docutils literal">st</tt>. Return the number of bytes
+that were written/buffered successfully, or 0 if
+no bytes could be written/buffered.</dd>
+<dt><tt class="docutils literal">st_read(st, buf, sz)</tt></dt>
+<dd>Read up to a maximum of <tt class="docutils literal">sz</tt> bytes from the stream
+identified by <tt class="docutils literal">st</tt> onto <tt class="docutils literal">buf</tt>. Return the
+number of bytes that were read successfully, or 0
+of no bytes could be read.</dd>
+<dt><tt class="docutils literal">st_flush(st)</tt></dt>
+<dd>Flush the buffer(s) associated with <tt class="docutils literal">st</tt>.</dd>
+<dt><tt class="docutils literal">st_putchar(st, c)</tt></dt>
+<dd>Write the character <tt class="docutils literal">c</tt> to the stream <tt class="docutils literal">st</tt>. Return 1 if the
+character could be written/buffered, 0 otherwise.</dd>
+<dt><tt class="docutils literal">st_getchar(st)</tt></dt>
+<dd>Read a character from <tt class="docutils literal">st</tt>. Return the character value (between
+0 and 255 inclusive), or -1 if no character could be read.</dd>
+<dt><tt class="docutils literal">st_puts(st, str)</tt></dt>
+<dd>Write the nul-terminated string identified by <tt class="docutils literal">str</tt>
+onto the stream identified by <tt class="docutils literal">st</tt>. Return the number
+of characters that were written/buffered successfully, or 0
+if no characters could be written/buffered.</dd>
+<dt><tt class="docutils literal">st_gets(st, str, sz)</tt></dt>
+<dd>Read at most one less than the number of characters specified by <tt class="docutils literal">sz</tt>
+from the stream <tt class="docutils literal">st</tt> and store them into <tt class="docutils literal">str</tt>. Reading stops
+when a newline character is found, at end-of-file or error.  The
+newline, if any, is retained.  If any characters are read and there
+is no error, a nul byte is appended to end the string.  Return the
+number of characters read (including the newline character, if any, but
+excluding the appended nul byte), or 0 if no characters could be read.</dd>
+<dt><tt class="docutils literal">st_getline(st)</tt></dt>
+<dd>Read a character string from <tt class="docutils literal">st</tt> into a freshly allocated heap
+object. Reading stops when a newline character is found, at
+end-of-file or error.  The newline, if any, is read from the stream
+but not written to the output string. If any characters are read, a
+nul byte is appended to end the string. Return the freshly
+allocated string, or 0 if no characters could be read.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="optional-extra-features">
+<h1>4&nbsp;&nbsp;&nbsp;Optional extra features</h1>
+<p>You may implement the following for a higher grade:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal">lseek</tt> system call:</p>
+<pre class="code c literal-block">
+<span class="c1">// Argument for whence:
+</span><span class="cp"># define SEEK_SET 0
+# define SEEK_CUR 1
+# define SEEK_END 2
+</span><span class="kt">long</span><span class="w"> </span><span class="nf">my_lseek</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">whence</span><span class="p">);</span>
+</pre>
+</li>
+<li><p class="first">a valid preprocessor macro definition for <tt class="docutils literal">O_APPEND</tt> in
+<tt class="docutils literal">mysys.h</tt>;</p>
+</li>
+<li><p class="first">the following additional libstream function:</p>
+<pre class="code c literal-block">
+<span class="kt">long</span><span class="w">     </span><span class="nf">st_lseek</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">whence</span><span class="p">);</span>
+</pre>
+<p>which calls <tt class="docutils literal">my_lseek</tt> for the underlying
+file descriptor and handles buffering appropriately.</p>
+</li>
+<li><p class="first">modes <tt class="docutils literal">&quot;a&quot;</tt> and <tt class="docutils literal">&quot;a+&quot;</tt> for <tt class="docutils literal">st_open</tt>, which
+open the stream using modes “append-only” and “read/append”.</p>
+</li>
+<li><p class="first">a global preprocessor macro called <tt class="docutils literal">ERRNO</tt> that
+can be used to retrieve the most recent error, like
+<tt class="docutils literal">errno</tt> in C.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="grading">
+<h1>5&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>0.25 point per system call correctly implemented in the mandatory list
+(1 points in total).</li>
+<li>0.5 points per <tt class="docutils literal">st_</tt> function correctly implemented in the mandatory
+list (5 points in total).</li>
+<li>+1 if the library supports changing the direction on streams opened
+read/write (from reading to writing or vice-versa) without invoking
+<tt class="docutils literal">st_flush</tt> in between.</li>
+<li>+0.5 if <tt class="docutils literal">my_lseek</tt> and <tt class="docutils literal">st_lseek</tt> are properly implemented.</li>
+<li>+0.5 if <tt class="docutils literal">O_APPEND</tt> is properly defined and <tt class="docutils literal">st_open</tt> supports
+modes <tt class="docutils literal">&quot;a&quot;</tt> and <tt class="docutils literal">&quot;a+&quot;</tt>.</li>
+<li>+0.5 if the syscall wrappers support more than one operating system /
+platform combination.</li>
+<li>+0.5 if the library works properly with different values of <tt class="docutils literal">ST_BUFFER_SIZE</tt>.</li>
+<li>+1 if <tt class="docutils literal">ERRNO</tt> is implemented properly without using
+a global variable.</li>
+</ul>
+</div>
+<div class="section" id="references">
+<h1>6&nbsp;&nbsp;&nbsp;References</h1>
+<p>Details about the syscall interfaces for Linux and FreeBSD:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://man7.org/linux/man-pages/man2/syscall.2.html">http://man7.org/linux/man-pages/man2/syscall.2.html</a></li>
+<li><a class="reference external" href="http://www.freebsd.org/doc/en/books/developers-handbook/x86-system-calls.html">http://www.freebsd.org/doc/en/books/developers-handbook/x86-system-calls.html</a></li>
+<li><a class="reference external" href="http://www.int80h.org/bsdasm/#system-calls">http://www.int80h.org/bsdasm/#system-calls</a></li>
+</ul>
+<p>System call numbers:</p>
+<pre class="code c literal-block">
+<span class="cp">#if defined(__FreeBSD__)
+# define O_RDONLY        0x0000
+# define O_WRONLY        0x0001
+# define O_RDWR          0x0002
+# define O_APPEND        0x0008
+# define O_CREAT         0x0200
+# define O_TRUNC         0x0400
+# define SYS_read        3
+# define SYS_write       4
+# define SYS_open        5
+# define SYS_close       6
+# define SYS_lseek       478
+#elif defined(__linux__)
+# define O_RDONLY    00
+# define O_WRONLY    01
+# define O_RDWR      02
+# define O_CREAT   0100
+# define O_TRUNC  01000
+# define O_APPEND 02000
+# if defined(__i386__)
+#  define SYS_read      3
+#  define SYS_write     4
+#  define SYS_open      5
+#  define SYS_close     6
+#  define SYS_lseek    19
+# elif defined(__x86_64)
+#  define SYS_read     0
+#  define SYS_write    1
+#  define SYS_open     2
+#  define SYS_close    3
+#  define SYS_lseek    8
+# endif
+#endif</span>
+</pre>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>7&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

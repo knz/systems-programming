@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>CryptServ</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="cryptserv">
+<h1 class="title">CryptServ</h1>
+
+<p>Deadline: October 24th, 2014.</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>You must implement a program <tt class="docutils literal">cryptserv</tt> working as follows.</p>
+<p><tt class="docutils literal">cryptserv</tt> must takes two command-line arguments; a numeric
+encryption/decryption key, and a filesystem path to use as Unix domain
+socket (<tt class="docutils literal">PF_UNIX/AF_UNIX</tt>).  It must then listen for connections on
+that socket. When a client connects, <tt class="docutils literal">cryptserv</tt> must
+encrypt/decrypt the received data stream from that client (cf
+<a class="reference internal" href="#cryptography">Cryptography</a> below) and send the results back to the client. The
+program must support exchanging data with multiple clients
+simultaneously.</p>
+<p>For extra credits you may implement the following:</p>
+<ul class="simple">
+<li>Detaching as a daemon when the command-line option <tt class="docutils literal"><span class="pre">-d</span></tt> is specified.</li>
+<li>Non-blocking I/O: communication
+with other clients can go on even if a client is blocked.</li>
+<li>Support for listening to multiple sockets/addresses.</li>
+</ul>
+<p>Constraints:</p>
+<ul class="simple">
+<li>You must only depend on standard C functions (either from ISO C 1999/2011 or
+POSIX).</li>
+<li>You must not use <tt class="docutils literal">system</tt> or any other mechanism that invokes an
+external program.</li>
+</ul>
+</div>
+<div class="section" id="cryptography">
+<h1>2&nbsp;&nbsp;&nbsp;Cryptography</h1>
+<p>The encryption (or decryption) of the data stream from one client  must
+use the following algorithm:</p>
+<ul>
+<li><p class="first">first the C library's random generator state must be initialized
+(<tt class="docutils literal">initstate</tt>) using the key as initial seed and
+a seed array of 256 bytes.</p>
+</li>
+<li><p class="first">each successive byte in the input stream must be XORed with the lowest
+8 bits of successive calls to <tt class="docutils literal">random</tt>:</p>
+<pre class="code c literal-block">
+<span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span><span class="w">
+</span><span class="n">initstate</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span><span class="w">
+</span><span class="n">setstate</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span><span class="w">
+</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">random</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="p">);</span><span class="w">
+</span><span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">random</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="p">);</span><span class="w">
+</span><span class="c1">// ...</span>
+</pre>
+</li>
+</ul>
+<p>Be sure that each client connection uses its own random state!</p>
+</div>
+<div class="section" id="example-use">
+<h1>3&nbsp;&nbsp;&nbsp;Example use</h1>
+<p>The following examples uses Netcat (<tt class="docutils literal">nc</tt>), a quasi-standard “swiss army” network tool:</p>
+<pre class="literal-block">
+# in one session
+$ ./cryptserv 0xdeadbeef /tmp/mysock
+
+# in another session
+$ echo hello &gt;msg.txt
+$ nc -U /tmp/mysock &lt;msg.txt &gt;msg.enc
+$ nc -U /tmp/mysock &lt;msg.enc &gt;msg2.txt
+$ cmp msg.txt msg.enc || echo OK
+$ cmp msg.txt msg2.txt &amp;&amp; echo OK
+
+# in yet another session
+$ nc -U /tmp/mysock &lt;/dev/urandom &gt;/dev/null &amp;
+$ echo hello | nc -U /tmp/mysock &amp;&amp; echo OK
+</pre>
+</div>
+<div class="section" id="grading">
+<h1>4&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>4 points if <tt class="docutils literal">cryptserv</tt> works with 1 client at a time, in constant memory space.</li>
+<li>+2 points if <tt class="docutils literal">cryptserv</tt> works with any number of clients simultaneously, in
+memory space linear with the number of clients connected.</li>
+<li>+1 point if all of the above, and the program detaches as a daemon properly if <tt class="docutils literal"><span class="pre">-d</span></tt> is given.</li>
+<li>+1 points if non-blocking I/O is properly implemented.</li>
+<li>+1 points if the program can listen to multiple sockets/addresses
+(explain your command-line syntax in an accompanying <tt class="docutils literal">README</tt> file.)</li>
+<li>+1 point if an enclosed <tt class="docutils literal">README</tt> file contains an explanation that
+properly identifies the encryption algorithm used in this assignment
+and suggests simple improvements to make it more secure.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>5&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

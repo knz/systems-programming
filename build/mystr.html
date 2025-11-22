@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MyStr</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="mystr">
+<h1 class="title">MyStr</h1>
+
+<p>Deadline: September 9th, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>You must implement the following functions, whose behavior
+must match the documentation for the standard function
+of the same name (without <tt class="docutils literal">my_</tt>):</p>
+<pre class="code c literal-block">
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">my_strchr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">
+</span><span class="kt">unsigned</span><span class="w"> </span><span class="nf">my_strlcpy</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">
+</span><span class="kt">unsigned</span><span class="w"> </span><span class="nf">my_strlcat</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">my_strncmp</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s2</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">
+</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">my_memcpy</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">
+</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">my_memset</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</pre>
+<p>You can optionally also implement the following for a higher grade
+(see <a class="reference internal" href="#grading">Grading</a> below):</p>
+<pre class="code c literal-block">
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">my_strrchr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">
+</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">my_strpbrk</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s2</span><span class="p">);</span><span class="w">
+</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">my_strstr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s2</span><span class="p">);</span><span class="w">
+</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">my_memmove</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</pre>
+<p>Constraints:</p>
+<ul class="simple">
+<li>each function must be implemented in a <tt class="docutils literal">.c</tt> file of its own, named
+after the function it contains. The function prototypes must be
+declared in a <tt class="docutils literal">.h</tt> file, in accordance with the C coding standard.
+The submitted archive may (but needs not) include a test program.</li>
+<li>you must not include any standard/system header in your code; nor
+use any function from the standard C library.</li>
+</ul>
+</div>
+<div class="section" id="grading">
+<h1>2&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>1 point per function correctly implemented in the mandatory list.</li>
+<li>+0.5 if all of the above, and a <tt class="docutils literal">Makefile</tt> places the functions in <tt class="docutils literal">libminic.a</tt>.</li>
+<li>+0.5 per optional function correctly implemented after all of the
+above.</li>
+<li>+0.5 if the submitted archive includes a <tt class="docutils literal">README</tt> file
+alongside the source files, containing a valid explanation of why
+this assignment uses “<tt class="docutils literal">const char *</tt>” for <tt class="docutils literal">my_strchr/my_strrchr</tt>
+whereas the C library uses “<tt class="docutils literal">char *</tt>” for <tt class="docutils literal">strchr/strrchr</tt>.</li>
+<li>+1 point for “cleverness” in either <tt class="docutils literal">my_strstr</tt>, <tt class="docutils literal">my_memcpy</tt> or
+<tt class="docutils literal">my_memmove</tt>, provided with an explanation and empirical proof of the
+improvement compared to a naive implementation.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>3&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

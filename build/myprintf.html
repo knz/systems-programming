@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MyPrintf</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="myprintf">
+<h1 class="title">MyPrintf</h1>
+
+<p>Deadline: September 22nd, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>You must implement the following function:</p>
+<pre class="code c literal-block">
+<span class="kt">int</span><span class="w"> </span><span class="nf">st_printf</span><span class="p">(</span><span class="n">st_t</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">fmt</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+</pre>
+<p>Constraints:</p>
+<ul class="simple">
+<li>each function must be implemented in a <tt class="docutils literal">.c</tt> file of its own, named
+after the function it contains. The function prototypes must be
+declared in a <tt class="docutils literal">.h</tt> file, in accordance with the C coding standard.
+The submitted archive may (but needs not) include a test program.</li>
+<li>you must include a <tt class="docutils literal">Makefile</tt> which properly places the  function(s)
+in <tt class="docutils literal">libminic.a</tt>.</li>
+<li>you must not include any standard/system header in your code,
+except for <tt class="docutils literal">&lt;stdarg.h&gt;</tt>, <tt class="docutils literal">&lt;stddef.h&gt;</tt> and <tt class="docutils literal">&lt;stdlib.h&gt;</tt>.</li>
+<li>you must not use any function from the standard C library, except
+for <tt class="docutils literal">malloc</tt>/<tt class="docutils literal">realloc</tt>/<tt class="docutils literal">free</tt>; however,
+you may use functions from a previous assignment, by including their
+source in your submission.</li>
+</ul>
+</div>
+<div class="section" id="function-semantics">
+<h1>2&nbsp;&nbsp;&nbsp;Function semantics</h1>
+<p><tt class="docutils literal">st_printf</tt> is based on the previous assignment (MyStream). It must
+format its arguments and output them to the stream identified by its
+first argument, buffering the output as needed.</p>
+<p>The format string is composed of zero or more directives: ordinary
+characters (not “%”), which are copied unchanged to the output
+stream; and conversion specifications, each of which results in
+fetching zero or more subsequent argument.
+<tt class="docutils literal">st_printf</tt> must recognize the following conversions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Conversion</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">%c</tt></td>
+<td>An <tt class="docutils literal">int</tt> argument is converted to <tt class="docutils literal">unsigned char</tt>, and the
+resulting character is written.</td>
+</tr>
+<tr><td><tt class="docutils literal">%s</tt></td>
+<td>A <tt class="docutils literal">const char*</tt> argument is written as a nul-terminated string.</td>
+</tr>
+<tr><td><tt class="docutils literal">%p</tt></td>
+<td>The value of a pointer is written in hexadecimal with a <tt class="docutils literal">0x</tt> prefix,
+or the string “<tt class="docutils literal">null</tt>” if the pointer is equal to 0.</td>
+</tr>
+<tr><td><tt class="docutils literal">%d</tt> / <tt class="docutils literal">%ld</tt></td>
+<td>A <tt class="docutils literal">int</tt>/<tt class="docutils literal">long</tt> argument is written in decimal.</td>
+</tr>
+<tr><td><tt class="docutils literal">%u</tt> / <tt class="docutils literal">%lu</tt></td>
+<td>A <tt class="docutils literal">unsigned</tt>/<tt class="docutils literal">unsigned long</tt> argument is written in decimal.</td>
+</tr>
+<tr><td><tt class="docutils literal">%x</tt> / <tt class="docutils literal">%lx</tt></td>
+<td>An <tt class="docutils literal">unsigned</tt>/<tt class="docutils literal">unsigned long</tt> argument is written in hexadecimal.</td>
+</tr>
+<tr><td><tt class="docutils literal">%%</tt></td>
+<td>A single “<tt class="docutils literal">%</tt>” is written; no argument is converted.</td>
+</tr>
+</tbody>
+</table>
+<p>The function must return the number of characters written/buffered, or 0
+if no character could be written.</p>
+<p>You may implement the following for a higher grade:</p>
+<ul>
+<li><p class="first">an optional “minimum width” in decimal between the “<tt class="docutils literal">%</tt>” character and the
+format.  For example, <tt class="docutils literal">st_printf(st, &quot;%10s&quot;, &quot;hello&quot;)</tt> prints 5 spaces
+followed by “<tt class="docutils literal">hello</tt>”.</p>
+</li>
+<li><p class="first">the modifier “<tt class="docutils literal">-</tt>” to align the field on the left instead of the
+right. For example, <tt class="docutils literal">st_printf(st, <span class="pre">&quot;%-10s&quot;,</span> &quot;hello&quot;)</tt> prints
+“<tt class="docutils literal">hello</tt>”  followed by 5 spaces.</p>
+</li>
+<li><p class="first">the modifier “<tt class="docutils literal">0</tt>” to pad a number with zeroes. For example,
+“<tt class="docutils literal">st_printf(st, &quot;%06d&quot;, 123)</tt>” would print “<tt class="docutils literal">000123</tt>”.</p>
+</li>
+<li><p class="first">a variable “minimum width” with <tt class="docutils literal">*</tt>, where the width
+is determined by an <tt class="docutils literal">int</tt> positional argument. For example,
+<tt class="docutils literal">st_printf(st, <span class="pre">&quot;%*s&quot;,</span> 6, &quot;hello&quot;)</tt> prints 1 spaces then “<tt class="docutils literal">hello</tt>”.</p>
+</li>
+<li><p class="first">the function:</p>
+<pre class="code c literal-block">
+<span class="kt">size_t</span><span class="w"> </span><span class="nf">my_snprintf</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fmt</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+</pre>
+<p>which formats its arguments like <tt class="docutils literal">st_printf</tt> but
+outputs the characters to the buffer <tt class="docutils literal">buf</tt>, with a maximum of
+<tt class="docutils literal">n</tt>-1 characters, terminated with a nul character. <tt class="docutils literal">my_snprintf</tt>
+must return the number of characters written (excluding the
+terminating nul) if <tt class="docutils literal">n</tt> is large enough, or the number of
+characters that would have been written otherwise.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="grading">
+<h1>3&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>0.75 point per conversion correctly implemented in the mandatory list
+(7.50 points in total);</li>
+<li>+0.5 if constant minimum width and alignment modifiers are properly implemented.</li>
+<li>+0.5 if zero-padding is properly implemented.</li>
+<li>+0.5 if variable minimum width is properly implemented.</li>
+<li>+0.5 if <tt class="docutils literal">st_printf</tt> does not use <tt class="docutils literal">malloc</tt>/<tt class="docutils literal">realloc</tt>/<tt class="docutils literal">free</tt>.</li>
+<li>+0.5 if <tt class="docutils literal">my_snprintf</tt> is properly implemented.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>4&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

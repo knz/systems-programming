@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MiniC</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="minic">
+<h1 class="title">MiniC</h1>
+
+<p>Deadline: September 5th, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<ol class="arabic simple">
+<li>Read and study the C coding standard that accompanies the course.</li>
+<li>Teach yourself the basics of the Unix environment, if necessary using
+the tutorial linked in <a class="reference internal" href="#references">References</a> below.</li>
+<li>Do the programming assignment described below.</li>
+</ol>
+</div>
+<div class="section" id="programming-assignment">
+<h1>2&nbsp;&nbsp;&nbsp;Programming assignment</h1>
+<p>The teaching goal of this assignment is to get used to the C
+programming environment and learn the basic of how libraries work.
+What you must do, in a nutshell:</p>
+<ul class="simple">
+<li>implement <tt class="docutils literal">my_strlen</tt> and <tt class="docutils literal">my_strcmp</tt>;</li>
+<li>implement a test program that uses these two functions;</li>
+<li>create a <tt class="docutils literal">Makefile</tt> containing rules to build a library containing
+the two functions, and the test program.</li>
+</ul>
+<div class="section" id="the-two-functions">
+<h2>2.1&nbsp;&nbsp;&nbsp;The two functions</h2>
+<p>You must implement the following two functions:</p>
+<pre class="code c literal-block">
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">my_strlen</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">);</span><span class="w">
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">my_strcmp</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s2</span><span class="p">);</span>
+</pre>
+<ul class="simple">
+<li><tt class="docutils literal">my_strlen</tt> must behave like the function <tt class="docutils literal">strlen</tt> from the
+standard C library. See <tt class="docutils literal">strlen(3)</tt> for details.</li>
+<li><tt class="docutils literal">my_strcmp</tt> must behave like the function <tt class="docutils literal">strcmp</tt> from the
+standard C library. See <tt class="docutils literal">strcmp(3)</tt> for details.</li>
+<li><tt class="docutils literal">my_strlen</tt> must be implemented in a file named <tt class="docutils literal">my_strlen.c</tt>.</li>
+<li><tt class="docutils literal">my_strcmp</tt> must be implemented in a file named <tt class="docutils literal">my_strcmp.c</tt>.</li>
+<li>the two function prototypes must be declared in a <tt class="docutils literal">.h</tt>
+file, in accordance with the C coding standard.</li>
+<li>you must not include any system header in your code.</li>
+<li>you must not use any function from the C standard library in your code.</li>
+</ul>
+</div>
+<div class="section" id="the-test-program">
+<h2>2.2&nbsp;&nbsp;&nbsp;The test program</h2>
+<p>You must implement a program which takes either one or two
+arguments on the command line:</p>
+<ul class="simple">
+<li>if one argument is provided, it must return its length as exit code.</li>
+<li>if two arguments are provided, it must return the result of their
+comparison as exit code.</li>
+</ul>
+<p>The program must be implemented in a file named <tt class="docutils literal">test.c</tt>. Again, you
+must not include any standard/system header nor use any function from
+the standard C library.</p>
+</div>
+<div class="section" id="the-makefile">
+<h2>2.3&nbsp;&nbsp;&nbsp;The <tt class="docutils literal">Makefile</tt></h2>
+<p>Your <tt class="docutils literal">Makefile</tt> must contain rules to build:</p>
+<ul class="simple">
+<li><tt class="docutils literal">libminic.a</tt>, a static library containing the two functions;</li>
+<li><tt class="docutils literal">test</tt>, the test program, linking with <tt class="docutils literal"><span class="pre">-lminic</span></tt>.</li>
+</ul>
+<p>Ensure that your <tt class="docutils literal">Makefile</tt> also follows the section “Build rules”
+in the C coding standard.</p>
+</div>
+</div>
+<div class="section" id="grading">
+<h1>3&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>8 if you have implemented <tt class="docutils literal">my_strlen</tt>, <tt class="docutils literal">my_strcmp</tt> and the test
+program as instructed and the implementation is correct.</li>
+<li>10 if you have completed all the programming assignment
+successfully.</li>
+<li>1 otherwise.</li>
+</ul>
+</div>
+<div class="section" id="references">
+<h1>4&nbsp;&nbsp;&nbsp;References</h1>
+<ul class="simple">
+<li>The C coding standard provided with the course.</li>
+<li>The online Unix manual; <tt class="docutils literal">man(1)</tt>.
+<a class="reference external" href="http://en.wikipedia.org/wiki/Man_page">http://en.wikipedia.org/wiki/Man_page</a></li>
+<li>Raphael Poss. Tutorial “Introductie Unix”, University of Amsterdam.
+<a class="reference external" href="http://staff.science.uva.nl/~poss/intro-unix.html">http://staff.science.uva.nl/~poss/intro-unix.html</a></li>
+<li>Carols Fenollosa. Unix Tricks. <a class="reference external" href="http://cfenollosa.com/misc/tricks.txt">http://cfenollosa.com/misc/tricks.txt</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>5&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

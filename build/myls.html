@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MyLs</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="myls">
+<h1 class="title">MyLs</h1>
+
+<p>Deadline: October 3rd, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>Implement a program named <tt class="docutils literal">myls</tt> that matches the following
+documentation:</p>
+<pre class="literal-block">
+Usage: myls [OPTION]... [FILE]...
+
+List information about the FILEs (the current directory
+by default). Sort the output alphabetically by default.
+
+Options:
+  -R       Recurse into subdirectories.
+  -l       Use a long listing format.
+</pre>
+<ul class="simple">
+<li>The program must terminate with code 0 if the operation
+completes successfully, 1 otherwise.</li>
+<li>Use only one column for the output.</li>
+<li>Entries whose name start with a period (<tt class="docutils literal">.</tt>) must be omitted,
+except if explicitly given on the command line.</li>
+<li>For the long listing, use the following format: file mode, number of
+links, owner user ID, group ID, number of bytes in the file,
+datetime of last modification in format YYYY-MM-DD HH:MM:SS,
+entry name, optionally followed by “<tt class="docutils literal"><span class="pre">-&gt;</span></tt>” and the link target
+for symbolic links.</li>
+<li>You may use any standard C function (either from ISO C 1999/2011 or
+POSIX).</li>
+<li>You may not use <tt class="docutils literal">system</tt> or any other mechanism that invokes an
+external program.</li>
+</ul>
+<p>You may implement the following for a higher grade:</p>
+<ul class="simple">
+<li>multi-column output if the output is a terminal;</li>
+<li>output sorting: by default alphanumeric on the entry name;
+no sorting if <tt class="docutils literal"><span class="pre">-f</span></tt> is specified; by modification time if <tt class="docutils literal"><span class="pre">-t</span></tt> is specified,
+by size if <tt class="docutils literal"><span class="pre">-S</span></tt> is specified. Tip: use <tt class="docutils literal">qsort(3)</tt>;</li>
+<li>any extra feature you deem particularly useful.</li>
+</ul>
+</div>
+<div class="section" id="grading">
+<h1>2&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>4 points if <tt class="docutils literal">myls</tt> works without arguments or with only one file/directory argument.</li>
+<li>+1 point if <tt class="docutils literal"><span class="pre">-R</span></tt> is properly implemented.</li>
+<li>+1 point if <tt class="docutils literal"><span class="pre">-l</span></tt> is properly implemented.</li>
+<li>+1 point if <tt class="docutils literal">myls</tt> also supports more than 1 file/directory argument.</li>
+<li>+0.5 point if multi-column output is properly implemented.</li>
+<li>+1.5 point if output sorting is properly implemented (including <tt class="docutils literal"><span class="pre">-f</span></tt>, <tt class="docutils literal"><span class="pre">-t</span></tt> and <tt class="docutils literal"><span class="pre">-S</span></tt>);</li>
+<li>+1 point if any additional feature is implemented and duly documented in an enclosed <tt class="docutils literal">README</tt> file, and your examinator agrees it is indeed useful.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>3&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

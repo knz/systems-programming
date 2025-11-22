@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MyHeap</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="myheap">
+<h1 class="title">MyHeap</h1>
+
+<p>Deadline: September 28th, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>Implement your own version of C's <tt class="docutils literal">malloc</tt>, <tt class="docutils literal">realloc</tt> and <tt class="docutils literal">free</tt>
+using only <tt class="docutils literal">mmap</tt> and <tt class="docutils literal">munmap</tt>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">my_malloc(x)</tt></td>
+<td>Allocate <tt class="docutils literal">x</tt> bytes of memory and returns a pointer to the
+allocated memory. Return 0 if no memory could be allocated. The
+return address must be sufficiently aligned for C's <tt class="docutils literal">long</tt> and
+<tt class="docutils literal">void*</tt> data types.</td>
+</tr>
+<tr><td><tt class="docutils literal">my_free(p)</tt></td>
+<td>Deallocate the allocation pointed to by <tt class="docutils literal">p</tt>, or do nothing if <tt class="docutils literal">p</tt> is 0.</td>
+</tr>
+<tr><td><tt class="docutils literal">my_realloc(p, n)</tt></td>
+<td>Reallocate the memory pointed to by <tt class="docutils literal">p</tt> to fit <tt class="docutils literal">n</tt> bytes of
+memory instead. Return a pointer to the reallocated memory, or 0 if the reallocation failed.</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>each function must be implemented in a <tt class="docutils literal">.c</tt> file of its own, named
+after the function it contains. The function prototypes must be
+declared in a <tt class="docutils literal">.h</tt> file, in accordance with the C coding standard.
+The submitted archive may (but needs not) include a test program.
+You must include a <tt class="docutils literal">Makefile</tt> which properly places the  functions
+in <tt class="docutils literal">libminic.a</tt>.</li>
+<li>you may assume a page size of 8192 bytes.</li>
+<li>the only standard/system header you may include are <tt class="docutils literal">&lt;stddef.h&gt;</tt>
+and <tt class="docutils literal">&lt;sys/mman.h&gt;</tt>; the only external functions you may use are
+<tt class="docutils literal">mmap</tt> and <tt class="docutils literal">munmap</tt> (you may use functions from a previous assignment, by including their source in your submission).</li>
+</ul>
+</div>
+<div class="section" id="grading">
+<h1>2&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>6 points if <tt class="docutils literal">my_malloc</tt>/<tt class="docutils literal">my_free</tt>/<tt class="docutils literal">my_realloc</tt> work as described. Tip: correctness &gt; performance.</li>
+<li>+1 point if the implementation makes a best effort to fit multiple
+small objects in a page.</li>
+<li>+0.5 point if <tt class="docutils literal">my_malloc</tt> attempts to reuse memory that was most
+recently freed.</li>
+<li>+1 point if the implementation makes a best effort at releasing
+pages to the operating system.</li>
+<li>+0.5 point if the implementation determines the page size
+automatically (using a portable mixture of <tt class="docutils literal">getpagesize</tt> and
+<tt class="docutils literal">sysconf</tt>; for this extra grade you may include <tt class="docutils literal">&lt;unistd.h&gt;</tt>).</li>
+<li>+1 point if the implementation provides its own wrappers for system calls.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>3&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

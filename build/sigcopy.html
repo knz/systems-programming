@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>SigCopy</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="sigcopy">
+<h1 class="title">SigCopy</h1>
+
+<p>Deadline: October 10th, 2014</p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>You must implement two programs <tt class="docutils literal">sigsend</tt> and <tt class="docutils literal">sigrecv</tt>, working
+as follows:</p>
+<ul class="simple">
+<li><tt class="docutils literal">sigsend</tt> takes a single command-line argument that
+identifies a file to send. It must print its process ID and start
+waiting for a client. When a client appears, it must
+transfer the file's contents to the client and terminate.</li>
+<li><tt class="docutils literal">sigrecv</tt> takes a single command-line argument that
+identifies a <tt class="docutils literal">sigsend</tt> process (via its PID). It must
+interact with that process to receive the remote file.
+The received bytes must be printed to the standard output.</li>
+</ul>
+<p>Example session:</p>
+<pre class="literal-block">
+# in shell 1
+$ echo hello&gt;test.txt
+$ ./sigsend test.txt
+12314
+
+# in shell 2
+$ ./sigrecv 12314
+hello
+</pre>
+<ul class="simple">
+<li>Your programs must use SIGUSR1 and SIGUSR2 for the data transfer. Tip: <tt class="docutils literal">sigaction/siginfo_t</tt>.</li>
+<li>You may use any standard C function (either from ISO C 1999/2011 or
+POSIX); however your code may not use any descriptor-based
+channel (file, pipe, socket, etc.) other than
+the standard output, nor use the SysV or POSIX “msg”, “mq”, “shm” or “sem” IPC facilities.</li>
+<li>You may not use <tt class="docutils literal">system</tt> or any other mechanism that invokes an
+external program.</li>
+</ul>
+</div>
+<div class="section" id="grading">
+<h1>2&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>6 points if your programs can transfer text files successfully.</li>
+<li>+2 points if your programs can transfer any binary file successfully.</li>
+<li>+1 point if your programs work even when the size of the file is
+not known in advance (eg. reading from <tt class="docutils literal">/dev/stdin</tt>).</li>
+<li>+1 point if your programs are robust to the spurious insersion
+of extra signals during the transfer.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>3&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

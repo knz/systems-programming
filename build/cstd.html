@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<meta name="author" content="Raphael ‘kena’ Poss" />
+<meta name="date" content="July 2014" />
+<title>C Coding standard</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="c-coding-standard">
+<h1 class="title">C Coding standard</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Raphael ‘kena’ Poss</td></tr>
+<tr><th class="docinfo-name">Date:</th>
+<td>July 2014</td></tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#introduction" id="toc-entry-1">1&nbsp;&nbsp;&nbsp;Introduction</a></li>
+<li><a class="reference internal" href="#systems-programming-vu-amsterdam" id="toc-entry-2">2&nbsp;&nbsp;&nbsp;Systems programming &#64; VU Amsterdam</a></li>
+<li><a class="reference internal" href="#file-system-layout" id="toc-entry-3">3&nbsp;&nbsp;&nbsp;File system layout</a></li>
+<li><a class="reference internal" href="#code-style" id="toc-entry-4">4&nbsp;&nbsp;&nbsp;Code style</a><ul class="auto-toc">
+<li><a class="reference internal" href="#comments-and-preprocessor" id="toc-entry-5">4.1&nbsp;&nbsp;&nbsp;Comments and preprocessor</a></li>
+<li><a class="reference internal" href="#namespaces-and-translation-units" id="toc-entry-6">4.2&nbsp;&nbsp;&nbsp;Namespaces and translation units</a><ul class="auto-toc">
+<li><a class="reference internal" href="#naming-conventions" id="toc-entry-7">4.2.1&nbsp;&nbsp;&nbsp;Naming conventions</a></li>
+<li><a class="reference internal" href="#visibility-of-identifiers" id="toc-entry-8">4.2.2&nbsp;&nbsp;&nbsp;Visibility of identifiers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#code-layout" id="toc-entry-9">4.3&nbsp;&nbsp;&nbsp;Code layout</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#compiler-warnings" id="toc-entry-10">5&nbsp;&nbsp;&nbsp;Compiler warnings</a></li>
+<li><a class="reference internal" href="#build-rules" id="toc-entry-11">6&nbsp;&nbsp;&nbsp;Build rules</a></li>
+<li><a class="reference internal" href="#run-time-behavior" id="toc-entry-12">7&nbsp;&nbsp;&nbsp;Run-time behavior</a></li>
+<li><a class="reference internal" href="#copyright-and-licensing" id="toc-entry-13">8&nbsp;&nbsp;&nbsp;Copyright and licensing</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h1><a class="toc-backref" href="#toc-entry-1">1&nbsp;&nbsp;&nbsp;Introduction</a></h1>
+<p>This document describes how to format and layout C code when preparing
+assigments to be graded. This standard exists to streamline the work
+of teaching assistants and to avoid common mistakes when programming
+in C.</p>
+<p>Note that in the text below, all “bad” examples are actually valid C
+code: they are <em>functionally equivalent</em> to the corresponding “good”
+example to the left. However, they are called “bad” because their
+<em>style</em> does not follow the standard.</p>
+</div>
+<div class="section" id="systems-programming-vu-amsterdam">
+<h1><a class="toc-backref" href="#toc-entry-2">2&nbsp;&nbsp;&nbsp;Systems programming &#64; VU Amsterdam</a></h1>
+<p>For the 3rd year <em>Systems Programming</em> course at the Vrije
+Universiteit, academic year 2014-2015, <strong>adherence to this standard is
+mandatory</strong>.</p>
+<p>The grading process will go as follows:</p>
+<ol class="arabic">
+<li><p class="first">does the submission follow the rules in <a class="reference internal" href="#file-system-layout">File system layout</a>
+below?</p>
+<p>no: reject from grading. Yes: proceed to step 2.</p>
+</li>
+<li><p class="first">does the C code follow the standard <a class="reference internal" href="#code-style">Code style</a> below?</p>
+<p>no: reject from grading. Yes: proceed to step 3.</p>
+</li>
+<li><p class="first">does the code compile without errors or warnings as per <a class="reference internal" href="#compiler-warnings">Compiler
+warnings</a> and <a class="reference internal" href="#build-rules">Build rules</a> below?</p>
+<p>no: reject from grading. Yes: proceed to step 4.</p>
+</li>
+<li><p class="first">grade the assignment using the assignment's criteria, constrained
+by the section <a class="reference internal" href="#run-time-behavior">Run-time behavior</a> below.</p>
+</li>
+</ol>
+<p><strong>No exceptions!</strong></p>
+</div>
+<div class="section" id="file-system-layout">
+<h1><a class="toc-backref" href="#toc-entry-3">3&nbsp;&nbsp;&nbsp;File system layout</a></h1>
+<ul>
+<li><p class="first">source trees must be submitted as a tarball compressed using either
+gzip or bzip2 (<tt class="docutils literal">.tar.gz</tt> or <tt class="docutils literal">.tar.bz2</tt>).</p>
+</li>
+<li><p class="first">submitted archives must expand to a directory named after the name
+of the archive without extension (ie. <tt class="docutils literal">foo.tar.gz</tt> must expand to
+<tt class="docutils literal">foo/</tt>).</p>
+</li>
+<li><p class="first">the top-level directory must contain a file named “<tt class="docutils literal">AUTHORS</tt>”
+(capitalized, with no extension), containing the name(s) and student
+number(s) of the project authors, one per line.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The student numbers are extracted automatically using
+a regular expression. Do not enter data that would match
+the regular expression unintendedly.</p>
+</div>
+</li>
+<li><p class="first">the provided tree must not contain any compiler output (<tt class="docutils literal">.o</tt>,
+<tt class="docutils literal">.i</tt>, <tt class="docutils literal">.s</tt> etc.) nor temporary files (<tt class="docutils literal">*.bak</tt>, <tt class="docutils literal">*~</tt>, <tt class="docutils literal">#*#</tt>,
+etc.).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="code-style">
+<h1><a class="toc-backref" href="#toc-entry-4">4&nbsp;&nbsp;&nbsp;Code style</a></h1>
+<div class="section" id="comments-and-preprocessor">
+<h2><a class="toc-backref" href="#toc-entry-5">4.1&nbsp;&nbsp;&nbsp;Comments and preprocessor</a></h2>
+<ul class="simple">
+<li>all <tt class="docutils literal">.h</tt> files must use a preprocessor fence
+(<tt class="docutils literal">#ifndef</tt>-<tt class="docutils literal">#define</tt>-<tt class="docutils literal">#endif</tt>) to prevent double inclusion.</li>
+<li>the macro name used as fence must be the name of the <tt class="docutils literal">.h</tt> file,
+capitalized. (for example, the fence for <tt class="docutils literal">foo.h</tt> must be
+<tt class="docutils literal">FOO_H</tt>).</li>
+<li>comments must be written in correct English. (In particular:
+sentences start with a capital letter, contain at least one verb and
+end with a period; prefer the active form; and use the present tense
+to describe what a piece of code does or should do.)</li>
+<li>disabled code must be delimited by “<tt class="docutils literal">#if 0 ... #endif</tt>”; ie. NOT
+by comment delimiters, which do not nest.</li>
+</ul>
+</div>
+<div class="section" id="namespaces-and-translation-units">
+<h2><a class="toc-backref" href="#toc-entry-6">4.2&nbsp;&nbsp;&nbsp;Namespaces and translation units</a></h2>
+<div class="section" id="naming-conventions">
+<h3><a class="toc-backref" href="#toc-entry-7">4.2.1&nbsp;&nbsp;&nbsp;Naming conventions</a></h3>
+<ul>
+<li><p class="first">all names (within code, but also file or directory names!) must be
+either fully expressive or use a well-known short mnemonic.</p>
+</li>
+<li><p class="first">Abbreviations are tolerated as long as they shorten the code
+significantly without loss of meaning.</p>
+</li>
+<li><p class="first">Preprocessor macros names and <tt class="docutils literal">enum</tt> values must be fully
+capitalized; preprocessor macro parameters must be simply
+capitalized; all other identifiers must be in small letters. Words
+must be separated by underscores.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="cp">#define XFREE(Var)   \
+      do             \
+      {              \
+        if (Var)     \
+          free(Var); \
+      }              \
+      while (0)
+#define MAX_LINE_SIZE 10
+</span><span class="k">enum</span><span class="w"> </span><span class="n">t</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="n">FIRST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="n">SECOND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">};</span><span class="w">
+</span><span class="k">struct</span><span class="w">      </span><span class="nc">my_list</span><span class="p">;</span><span class="w">
+</span><span class="k">enum</span><span class="w">        </span><span class="n">some_enum</span><span class="p">;</span><span class="w">
+</span><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">custom_t</span><span class="p">;</span><span class="w">
+</span><span class="kt">void</span><span class="w">        </span><span class="nf">compute_some</span><span class="p">();</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="cp">#define xfree(VAR)   \
+      do             \
+      {              \
+        if (VAR)     \
+          free(VAR); \
+      }              \
+      while (0)
+#define max_L_sz 10
+</span><span class="k">enum</span><span class="w"> </span><span class="n">t</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="n">First</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">};</span><span class="w">
+</span><span class="k">struct</span><span class="w">      </span><span class="nc">myList</span><span class="p">;</span><span class="w">
+</span><span class="k">enum</span><span class="w">        </span><span class="n">SomeENUM</span><span class="p">;</span><span class="w">
+</span><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Custom_t</span><span class="p">;</span><span class="w">
+</span><span class="kt">void</span><span class="w">        </span><span class="nf">computesome</span><span class="p">();</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">typedef names must be suffixed with “<tt class="docutils literal">_t</tt>”.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">uint_t</span><span class="p">;</span><span class="w">
+</span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w">   </span><span class="nc">point</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="kt">int</span><span class="w">           </span><span class="n">x</span><span class="p">;</span><span class="w">
+   </span><span class="kt">int</span><span class="w">           </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span><span class="w">                </span><span class="n">point_t</span><span class="p">;</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">uint</span><span class="p">;</span><span class="w">
+</span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w">   </span><span class="nc">point</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="kt">int</span><span class="w">           </span><span class="n">x</span><span class="p">;</span><span class="w">
+   </span><span class="kt">int</span><span class="w">           </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span><span class="w">                </span><span class="n">point</span><span class="p">;</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">the name of global variables (when at all necessary, see next section),
+must start with the prefix “<tt class="docutils literal">g_</tt>”.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="visibility-of-identifiers">
+<h3><a class="toc-backref" href="#toc-entry-8">4.2.2&nbsp;&nbsp;&nbsp;Visibility of identifiers</a></h3>
+<ul class="simple">
+<li>there must not be any variable definition in the global scope
+(either <tt class="docutils literal">static</tt> or non-<tt class="docutils literal">static</tt>), unless explicitly authorized
+by an assignment.</li>
+<li>there must be at most 5 non-<tt class="docutils literal">static</tt> definitions per <tt class="docutils literal">.c</tt> file.</li>
+<li>the prototype of each non-<tt class="docutils literal">static</tt> functions must be declared
+exactly once per project, in some <tt class="docutils literal">.h</tt> file. (Different
+declarations may be split into different <tt class="docutils literal">.h</tt> files.)</li>
+<li>the <tt class="docutils literal">.h</tt> file where a non-<tt class="docutils literal">static</tt> function prototype is
+declared, must be included by the <tt class="docutils literal">.c</tt> file where the function is defined
+and all files where the function is used.</li>
+<li>all <tt class="docutils literal">static</tt> function prototypes must be declared exactly once at
+the beginning of the <tt class="docutils literal">.c</tt> file before they are defined.</li>
+<li>all <tt class="docutils literal">static</tt> functions must be used.</li>
+<li>all local variables (including function parameters) must be used.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="code-layout">
+<h2><a class="toc-backref" href="#toc-entry-9">4.3&nbsp;&nbsp;&nbsp;Code layout</a></h2>
+<ul>
+<li><p class="first">code may not contain unprintable ASCII characters.</p>
+</li>
+<li><p class="first">code must only use ASCII space (code 32) and newline characters
+(code 10) as white space; in particular ASCII tabs (code 9) must not
+be used, nor the DOS/Windows carriage return (code 13).</p>
+</li>
+<li><p class="first">all code must fit within 80 columns.</p>
+</li>
+<li><p class="first">code must not contain trailing whitespaces.</p>
+</li>
+<li><p class="first">the body of a function definition can contain at most 25 lines of
+code (opening and closing braces excluded).</p>
+</li>
+<li><p class="first">function bodies must not contain any comments; comments that explain
+a function should be placed before the function definition.</p>
+</li>
+<li><p class="first">blocks must be indented; the same indentation width must be used
+consistently throughout a submission, with a minimum of 2 spaces.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// 1 spaces = too small
+</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="c1">// 5 spaces not consistent
+</span><span class="w">       </span><span class="c1">// with 1 used above
+</span><span class="w">       </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">opening and closing braces for statement blocks must always appear
+on a line of their own, aligned with one another.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad
+</span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">the opening brace for a struct, union or enum declaration must
+appear on a line of its own; the closing brace must be the first
+token on a line, aligned with the opening brace; if a closing brace
+is followed by a declarator, then the declarator must begin on the
+same line.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+   </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span><span class="p">};</span><span class="w">
+</span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="n">FALSE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="n">TRUE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w"> </span><span class="n">bool_t</span><span class="p">;</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad
+</span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+   </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w">
+
+</span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="n">FALSE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="n">TRUE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">bool_t</span><span class="p">;</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">a control structure (<tt class="docutils literal">if</tt>, <tt class="docutils literal">for</tt>, etc.) must always be followed
+by a new line.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">)</span><span class="w">
+   </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">);</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">);</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">);</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">);</span><span class="w">
+        </span><span class="p">}</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">at most one variable can be declared by line.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">
+  </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">
+  </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">all variable declarations within a scope must appear at the start of
+the scope.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">
+  </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="kt">void</span><span class="w"> </span><span class="nf">bar</span><span class="p">()</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
+
+  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+      </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w">
+
+      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w">
+      </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w">
+
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">
+  </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="kt">void</span><span class="w"> </span><span class="nf">bar</span><span class="p">()</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w">
+
+      </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">the declarations must be separated from the first statement with a
+blank line.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">
+  </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w">
+  </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">
+  </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">all declared identifiers in a group of declarations must be aligned
+on the same text column within a scope, using spaces between
+the &quot;declaration specifiers&quot; and the &quot;declarator&quot; parts.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">int</span><span class="w">         </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span><span class="kt">char</span><span class="w">        </span><span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="w">
+</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w">   </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span><span class="kt">void</span><span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">z</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w">
+</span><span class="k">struct</span><span class="w">      </span><span class="nc">t</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="kt">char</span><span class="w">    </span><span class="n">u</span><span class="p">;</span><span class="w">
+    </span><span class="kt">char</span><span class="w">    </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">};</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span><span class="kt">char</span><span class="o">*</span><span class="w">       </span><span class="n">p</span><span class="w">
+</span><span class="kt">long</span><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">z</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w">
+</span><span class="k">struct</span><span class="w"> </span><span class="nc">t</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="kt">char</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w">
+  </span><span class="kt">char</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">
+</span><span class="p">};</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">variable initializations must be separated from variable
+declarations, except when the variable is <tt class="docutils literal">static</tt> where
+there must always be an initializer in the declaration:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="kt">int</span><span class="w">        </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="kt">int</span><span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">all <em>keywords</em> with arguments must be followed by exactly one space
+before their argument(s).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="k">if</span><span class="w"> </span><span class="p">(...)</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(...)</span><span class="w">
+</span><span class="k">return</span><span class="w"> </span><span class="p">...</span><span class="w">
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="p">(...)</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="k">if</span><span class="p">(...)</span><span class="w">
+</span><span class="k">for</span><span class="p">(...)</span><span class="w">
+</span><span class="k">return</span><span class="p">(...)</span><span class="w">
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(...)</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">all binary operators except the comma, and the ternary (“<tt class="docutils literal"><span class="pre">?:</span></tt>”)
+operator, must be separated from their operands with exactly one
+space (when the operand is on the same line).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">g</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">g</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">unary operators must precede or follow their operand without
+intervening white space.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">;</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">x</span><span class="p">;</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="w">     </span><span class="n">p</span><span class="w">   </span><span class="o">++</span><span class="p">;</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="w">
+   </span><span class="n">x</span><span class="p">;</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">an opening parenthesis “<tt class="docutils literal">(</tt>” or square bracket “<tt class="docutils literal">[</tt>” must be
+followed by the following token without intervening whitespace; conversely,
+a closing parenthesis “<tt class="docutils literal">)</tt>” or square bracket “<tt class="docutils literal">]</tt>” must
+follow the preceding token without intervening whitespace.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="w">  </span><span class="n">y</span><span class="p">);</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="w">  </span><span class="p">];</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">a function expression or preprocessor macro name must be followed by
+the opening parenthesis of the argument list without intervening
+white space.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="n">f</span><span class="p">();</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">)(</span><span class="n">x</span><span class="p">);</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="n">f</span><span class="w"> </span><span class="p">();</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">)</span><span class="w">   </span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="w">   </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">remember that <tt class="docutils literal">exit</tt> is a function but <tt class="docutils literal">return</tt> and <tt class="docutils literal">sizeof</tt> are keywords.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">cp</span><span class="p">)</span><span class="w">
+   </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">cp</span><span class="p">)</span><span class="w">
+   </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span><span class="k">return</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">commas and semicolons must follow the preceding token without
+whitespace, and must be separated from the next token (if any) with
+a white space.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><pre class="code c first last literal-block">
+<span class="c1">// Good:
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">
+</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="k">return</span><span class="p">;</span>
+</pre>
+</td>
+<td><pre class="code c first last literal-block">
+<span class="c1">// Bad:
+</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w">
+</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">;</span><span class="o">++</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="k">return</span><span class="w"> </span><span class="p">;</span>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">the <tt class="docutils literal">switch</tt> and <tt class="docutils literal">goto</tt> statements must not be used.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="compiler-warnings">
+<h1><a class="toc-backref" href="#toc-entry-10">5&nbsp;&nbsp;&nbsp;Compiler warnings</a></h1>
+<p>All C code must compile without errors or warnings when the following
+compiler flags are provided:</p>
+<p><tt class="docutils literal"><span class="pre">-std=c11</span></tt>
+<tt class="docutils literal"><span class="pre">-Werror</span></tt>
+<tt class="docutils literal"><span class="pre">-pedantic</span></tt>
+<tt class="docutils literal"><span class="pre">-Wall</span></tt>
+<tt class="docutils literal"><span class="pre">-Wextra</span></tt>
+<tt class="docutils literal"><span class="pre">-Wformat=2</span></tt>
+<tt class="docutils literal"><span class="pre">-O</span> <span class="pre">-Wuninitialized</span> <span class="pre">-Winit-self</span></tt>
+<tt class="docutils literal"><span class="pre">-Wswitch-enum</span></tt>
+<tt class="docutils literal"><span class="pre">-Wdeclaration-after-statement</span></tt>
+<tt class="docutils literal"><span class="pre">-Wshadow</span></tt>
+<tt class="docutils literal"><span class="pre">-Wpointer-arith</span></tt>
+<tt class="docutils literal"><span class="pre">-Wcast-qual</span></tt>
+<tt class="docutils literal"><span class="pre">-Wcast-align</span></tt>
+<tt class="docutils literal"><span class="pre">-Wwrite-strings</span></tt>
+<tt class="docutils literal"><span class="pre">-Wconversion</span></tt>
+<tt class="docutils literal"><span class="pre">-Waggregate-return</span></tt>
+<tt class="docutils literal"><span class="pre">-Wstrict-prototypes</span></tt>
+<tt class="docutils literal"><span class="pre">-Wmissing-prototypes</span></tt>
+<tt class="docutils literal"><span class="pre">-Wmissing-declarations</span></tt>
+<tt class="docutils literal"><span class="pre">-Wredundant-decls</span></tt>
+<tt class="docutils literal"><span class="pre">-Wnested-externs</span></tt>
+<tt class="docutils literal"><span class="pre">-Wno-long-long</span></tt>
+(for Clang only:)
+<tt class="docutils literal"><span class="pre">-Wglobal-constructors</span></tt>
+<tt class="docutils literal"><span class="pre">-Wshorten-64-to-32</span></tt></p>
+</div>
+<div class="section" id="build-rules">
+<h1><a class="toc-backref" href="#toc-entry-11">6&nbsp;&nbsp;&nbsp;Build rules</a></h1>
+<ul>
+<li><p class="first">the command:</p>
+<pre class="literal-block">
+cc -I. -c *.[cS]
+</pre>
+<p>must always complete successfully (with all flags described in
+<a class="reference internal" href="#compiler-warnings">Compiler warnings</a> above). In particular, all source files must be
+present at the toplevel directory, and no invalid/incomplete source
+files must remain laying around.</p>
+</li>
+<li><p class="first">if a <tt class="docutils literal">Makefile</tt> is submitted, then:</p>
+<ul class="simple">
+<li>“<tt class="docutils literal">all</tt>” must be the first target, i.e. “<tt class="docutils literal">make</tt>” without argument
+must be equivalent to “<tt class="docutils literal">make all</tt>”.</li>
+<li>“<tt class="docutils literal">make all</tt>” must complete successfully and produce all
+targets defined in each assignment.</li>
+<li>“<tt class="docutils literal">make clean</tt>” must complete successfully and remove
+all generated files. In addition, the tree must be clean
+to start with, ie. running “<tt class="docutils literal">make clean</tt>” just after unpacking
+the tree must not remove any file.</li>
+<li>“<tt class="docutils literal">make clean &amp;&amp; make all</tt>” must complete successfully and
+result in the same output as “<tt class="docutils literal">make all</tt>”.</li>
+<li>“<tt class="docutils literal">make clean</tt>” must be idempotent (in particular “<tt class="docutils literal">make clean
+&amp;&amp; make clean</tt>” always works).</li>
+<li>it must be possible to add arbitrary flags to C compilation and
+linker commands using “<tt class="docutils literal">make <span class="pre">CFLAGS=...</span></tt>” or “<tt class="docutils literal">make
+<span class="pre">LDFLAGS=...</span></tt>” on the command line.</li>
+<li>it must be possible to replace the C compiler or linker using “<tt class="docutils literal">make
+<span class="pre">CC=...</span></tt>” or “<tt class="docutils literal">make <span class="pre">LD=...</span></tt>” on the command line.</li>
+</ul>
+</li>
+<li><p class="first">if the submission includes a program named “<tt class="docutils literal">configure</tt>”, then
+this program must be executable without argument; in addition, it
+will be executed exactly once before testing for <tt class="docutils literal">Makefile</tt> rules
+as described above.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="run-time-behavior">
+<h1><a class="toc-backref" href="#toc-entry-12">7&nbsp;&nbsp;&nbsp;Run-time behavior</a></h1>
+<ul class="simple">
+<li>objects must not be accessed outside of their lifetime or their
+storage (cf. <tt class="docutils literal">valgrind</tt>), in particular:<ul>
+<li>don't let code dereference invalid pointers;</li>
+<li>don't let code access heap objects after they have been
+<tt class="docutils literal">free</tt>'d;</li>
+<li>don't let code read variables before their initialization;</li>
+<li>don't let code access local variables after the function where they
+were defined has returned;</li>
+<li>don't let code access local variables after the control flow has
+left the scope where they were defined;</li>
+<li>don't let code access arrays out of bounds.</li>
+</ul>
+</li>
+<li>all allocated memory must be freed
+(cf. <tt class="docutils literal">valgrind <span class="pre">--leak-check=full</span></tt>).</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1><a class="toc-backref" href="#toc-entry-13">8&nbsp;&nbsp;&nbsp;Copyright and licensing</a></h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>

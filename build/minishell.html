@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>MiniShell</title>
+<link rel="stylesheet" href="aux/min.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="minishell">
+<h1 class="title">MiniShell</h1>
+
+<p>Deadline: October 31st, 2014. <strong>For this assignment you may work in pairs.</strong></p>
+<div class="section" id="instructions">
+<h1>1&nbsp;&nbsp;&nbsp;Instructions</h1>
+<p>You must implement a program <tt class="docutils literal">minish</tt> which can be used as a Unix
+shell.</p>
+<p><tt class="docutils literal">minish</tt> must support at least simple commands with zero or more
+arguments, and commands separated by semicolons. Extra whitespace must
+be condensed. For example <tt class="docutils literal">echo hello ; echo world</tt> must behave the
+same as <tt class="docutils literal">echo hello;echo world</tt>. The shell must also support the
+built-in commands <tt class="docutils literal">exit</tt> and <tt class="docutils literal">cd</tt>; both with either zero or one
+argument.</p>
+<p>You must then choose a selection of features in the following set
+to achieve a passing grade and beyond, see <a class="reference internal" href="#grading">Grading</a> below:</p>
+<ul class="simple">
+<li>Command pipelines, eg. <tt class="docutils literal">ls | grep foo</tt></li>
+<li>Simple redirections at the end of simple commands, eg. <tt class="docutils literal">tr <span class="pre">a-z</span> <span class="pre">A-Z</span>
+&lt;fin &gt;fout</tt></li>
+<li>File globbing: support for expanding <tt class="docutils literal">*</tt>, <tt class="docutils literal">?</tt> etc. in a command
+line into a list of files/directories using <tt class="docutils literal">glob(3)</tt>.</li>
+<li>Setting or unsetting environment variables with <tt class="docutils literal">setenv</tt> and
+<tt class="docutils literal">unsetenv</tt>.  (Note: you need not implement variable expansion. If
+you do, it must be unsurprising.)</li>
+<li>Simple quoting: <tt class="docutils literal">&quot;foo bar&quot;</tt> is passed as a single argument.  Must
+support simple <tt class="docutils literal">\</tt> escapes: <tt class="docutils literal"><span class="pre">&quot;foo\&quot;bar&quot;</span></tt> counts as one argument
+with 7 characters (<tt class="docutils literal">foo&quot;bar</tt>). If globbing is supported, quoting
+must disable globbing, ie. <tt class="docutils literal">&quot;*&quot;</tt> is not expanded and passed
+as a single character.</li>
+<li>Command groups enclosed in <tt class="docutils literal"><span class="pre">{...}</span></tt> (same shell) or <tt class="docutils literal"><span class="pre">(...)</span></tt> (sub-shell).</li>
+<li>Job control: <tt class="docutils literal">command &amp;</tt> detaches; Ctrl+Z suspends, <tt class="docutils literal">jobs</tt> lists
+the currently managed jobs; <tt class="docutils literal">fg</tt>/<tt class="docutils literal">bg</tt> resumes a job in the
+foreground or background.</li>
+<li>Any extra feature you deem particularly useful.</li>
+</ul>
+<p>Constraints:</p>
+<ul class="simple">
+<li>You must only depend on standard C functions (either from ISO C 1999/2011 or
+POSIX).</li>
+<li>You must not use <tt class="docutils literal">system</tt> or any other mechanism that invokes an
+existing shell to execute the command lines.</li>
+</ul>
+</div>
+<div class="section" id="example-commands">
+<h1>2&nbsp;&nbsp;&nbsp;Example commands</h1>
+<pre class="literal-block">
+$ echo hello; touch /tmp/hello.txt
+hello
+$ ls /tmp | grep .txt
+hello.txt
+$ ls /dev &gt;/tmp/hello.txt
+$ tr d &#64; &lt;/tmp/hello.txt | grep st&#64;
+st&#64;err
+st&#64;in
+st&#64;out
+
+# Example globbing:
+$ ls /dev/std* /tmp/*.c
+
+# Example quoting:
+$ echo &quot;hello;\n world&quot;
+hello;n world
+
+# Example environment variables:
+$ setenv MY hello
+$ bash -c &quot;echo $MY&quot;
+hello
+
+# Example command groups:
+$ ( echo hello; echo world ) &gt;hello.txt
+$ tr \n . &lt;hello.txt
+hello.world
+
+$ setenv I hello; { setenv I world }; bash -c &quot;echo $I&quot;
+world
+$ setenv I hello; ( setenv I world ); bash -c &quot;echo $I&quot;
+hello
+</pre>
+</div>
+<div class="section" id="grading">
+<h1>3&nbsp;&nbsp;&nbsp;Grading</h1>
+<ul class="simple">
+<li>3 points if your shell properly handles simple commands separated by
+semicolons, and if the built-ins <tt class="docutils literal">exit</tt> and <tt class="docutils literal">cd</tt> are properly
+implemented.</li>
+<li>+2 points if command pipelines are properly supported.</li>
+<li>+1 point if simple redirections are properly supported.</li>
+<li>+1 point if <tt class="docutils literal">setenv/unsetenv</tt> are properly supported.</li>
+<li>+1 point if simple quoting is properly supported.</li>
+<li>+2 points if file globbing is properly supported.</li>
+<li>+2 points if command groups are properly supported.</li>
+<li>+4 points if job control is properly implemented.</li>
+<li>+2 point if any additional feature is implemented and
+duly documented in an enclosed <tt class="docutils literal">README</tt> file, and
+your examinator agrees it is indeed useful.</li>
+</ul>
+<p>Tips: the maximum grade is 10; there are multiple ways to get
+there. As usual, go for correctness before completeness. Test a
+lot. Use version control. Consider pair programming.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="copyright-and-licensing">
+<h1>4&nbsp;&nbsp;&nbsp;Copyright and licensing</h1>
+<p>Copyright © 2014, Raphael ‘kena’ Poss.  Permission is granted to
+distribute, reuse and modify this document and other documents for the
+Systems Programming course by the same author according to the terms
+of the Creative Commons Attribution-ShareAlike 4.0 International
+License.  To view a copy of this license, visit
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>.</p>
+</div>
+</div>
+</body>
+</html>
